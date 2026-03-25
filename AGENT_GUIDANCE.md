@@ -23,7 +23,7 @@ Every tool and resource is gated by a permission level. The user sets the level 
 | **L1** | Engagement | Auto-granted | Territory, learning level, program day, check-in frequency. No somatic content. |
 | **L2** | Intelligence | One-time consent | Current somatic state (zone, quality, intensity), temporal patterns, regulation capacity, intervention recommendations, protective factors, check-in history, ecological context. |
 | **L3** | Patterns | Per-connection, 30-day expiry | Pattern detection outputs, territory assignments, prediction accuracy, prevention signals, timeline summaries, learning trajectory. Clinical-level reasoning. |
-| **L4** | Full Timeline | Per-connection consent | Reserved for cloud-backed full timeline access in v3.0. Defined in the permission enum but no tools currently gated at L4. |
+| **L4** | Full Timeline | Per-connection consent | Reserved for cloud-backed full timeline access in v3.0. Defined in the permission model but no tools currently gated at L4. |
 
 Permission changes take effect immediately. Downgrading is instant and total.
 
@@ -42,7 +42,7 @@ Permission changes take effect immediately. Downgrading is instant and total.
 | Tool | Returns |
 |------|---------|
 | `get_regulation_capacity` | Current regulation capacity score, learning level, intervention response trends, shift magnitude averages. |
-| `get_intervention_recommendation` | LINK's recommended intervention for current state: intervention ID, mechanism type, rationale, estimated duration. |
+| `get_intervention_recommendation` | Recommended intervention for current state: intervention ID, mechanism type, rationale, estimated duration. |
 | `get_protective_factors` | User's protective factor profile across 8 categories (movement, social, creative, nature, spiritual, intellectual, routine, rest). |
 | `get_check_in_history` | Recent check-ins with zone activations, sensation qualities, intensity values, context tags, timestamps. Configurable date range. |
 | `get_ecological_context` | Current ecological pressure profile: active life transitions, context chip frequency, Bronfenbrenner layer analysis, relational map summary. |
@@ -52,7 +52,7 @@ Permission changes take effect immediately. Downgrading is instant and total.
 | Tool | Returns |
 |------|---------|
 | `get_prediction_accuracy` | Prediction testing outcomes: predicted vs actual zone/intensity, composite accuracy scores, trend over time. |
-| `get_pattern_summary` | LINK pattern detection results: detected patterns with confidence scores, cross-domain correlations, territory-specific signatures. |
+| `get_pattern_summary` | Pattern detection results: detected patterns with confidence scores, cross-domain correlations, territory-specific signatures. |
 | `get_prevention_signals` | Active prevention state: whether 3-day escalating trajectory is detected, escalation details, suggested response. SSE streaming available. |
 | `get_timeline_summary` | 90-day rolling window: territory evolution, pattern trajectory, program arc position, key transitions, regulation capacity trend. |
 | `get_learning_trajectory` | Bayesian advancement history: learning level transitions with dates, mastery confidence scores, prediction accuracy trend over program arc. |
@@ -84,8 +84,8 @@ Read-only data surfaces. No writes, no side effects.
 
 The following data is **architecturally excluded** at every permission level, including L4:
 
-- Substance use data (SDSubstanceEntry)
-- Medication names, doses, or schedules (SDMedicationEntry)
+- Substance use data
+- Medication names, doses, or schedules
 - Journal entries and free-text reflections
 - Raw body map coordinates (agents receive zone names, not pixel positions)
 - High-urgency prevention signals (routed to crisis resources, not external agents)

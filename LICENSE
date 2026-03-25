@@ -21,6 +21,6 @@ Note: This license applies to the vocabulary layer (zone definitions, sensation 
 territory profiles, affect system mappings, agent guidance, and ontology documentation)
 contained in this repository.
 
-The clinical implementation of Cathexis (intervention graphs, LINK detection logic,
+The clinical implementation of Cathexis (intervention graphs, pattern detection logic,
 Bayesian inference pipeline, therapeutic content, and application source code) is
 proprietary and not covered by this license.

@@ -10,7 +10,7 @@ Each profile describes how a nervous system is organized — not a diagnosis. Mo
 
 ```json
 {
-  "territory": "string — Territory code (matches BodyZone enum)",
+  "territory": "string — Territory code",
   "number": "int — T1–T16",
   "name": "string — Display name",
   "core_prediction": "string — The brain's high-confidence prediction driving the pattern",

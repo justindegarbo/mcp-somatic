@@ -53,7 +53,7 @@ Machine-readable formats: OWL, Turtle, JSON-LD — all available at the Zenodo D
 
 **Vocabulary layer (this repository):** CC BY-NC-SA 4.0. Use the zones, qualities, territories, and affect system vocabulary in your agents and research. Attribution required. Non-commercial use.
 
-**Clinical implementation (Cathexis app):** Proprietary. The intervention graphs, LINK detection logic, Bayesian inference pipeline, and therapeutic content are not included in this repository.
+**Clinical implementation (Cathexis app):** Proprietary. The intervention graphs, pattern detection logic, Bayesian inference pipeline, and therapeutic content are not included in this repository.
 
 ## Version
 
