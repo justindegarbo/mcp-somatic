@@ -1,220 +1,414 @@
-# Territory Profiles — Machine-Readable Reference
+# Territory Profiles
 
-**16 territories of human experience.** Each represents a distinct neurobiological pattern of suffering with a characteristic predictive model, affect configuration, somatic signature, and network configuration. Derived from the Human Experience Framework (HEF). Full clinical detail in the [HEF Clinical Manual](https://doi.org/10.5281/zenodo.19157697).
+Machine-readable profiles for all 16 territories of the Human Experience Framework.
+
+Each profile describes how a nervous system is organized — not a diagnosis. Most people occupy multiple territories simultaneously.
+
+---
 
 ## Schema
 
-Each territory profile uses this structure:
-
-```yaml
-territory:
-  id: T1
-  uri: cso:threat
-  name: Living in Threat
-  status: live | planned | deferred
-  version: 2.2
-  predictive_pattern: string
-  primary_affects: [FEAR, SEEKING_suppressed]
-  network_configuration:
-    locked_hubs: [amygdala]
-    hyperactive: [salience, fearThreat]
-    suppressed: [defaultMode, executive]
-  somatic_signature:
-    primary_zones: [upperChest, solarPlexus, jawMouth]
-    primary_qualities: [tightness, pressure, buzzing]
-  dsm_correspondences: [F41.1, F43.10]
-  change_mechanism: prediction_error
-  learning_levels: [L1, L2, L3, L4, L5, L6]
+```json
+{
+  "territory": "string — Territory code (matches BodyZone enum)",
+  "number": "int — T1–T16",
+  "name": "string — Display name",
+  "core_prediction": "string — The brain's high-confidence prediction driving the pattern",
+  "affect_signature": {
+    "primary": ["string — Panksepp systems elevated or suppressed"],
+    "pattern": "string — How affect systems interact"
+  },
+  "blanket_pattern": {
+    "type": "string — porosity | rigidity | damage | boundary | mismatch | limit",
+    "description": "string — Markov blanket state"
+  },
+  "somatic_markers": ["string — Common body zone activations"],
+  "sensation_qualities": ["string — Common sensation qualities"],
+  "clinical_risk": "low | moderate | high | critical",
+  "status": "shipping | planned | deferred"
+}
 ```
 
-## Territory 1: Living in Threat
+---
 
-- **URI:** `cso:threat`
-- **Status:** Live (2.2)
-- **Predictive pattern:** The world is dangerous. Hypervigilance is survival. Relaxation is exposure.
-- **Primary affects:** FEAR (dominant), SEEKING (suppressed)
-- **Network configuration:** Amygdala-locked salience network dominance. Default mode suppressed (can't rest). Executive partially available but hijacked for threat scanning. Interoceptive network hyperactive (body as alarm system).
-- **Somatic signature:** Upper chest tightness, solar plexus pressure, jaw clenching, shoulder elevation, shallow rapid breathing, tingling in extremities
-- **DSM correspondences:** F41.1 Generalized anxiety, F41.0 Panic disorder, F43.10 PTSD (if trauma-related), F40.10 Social anxiety
-- **Change mechanism:** Prediction error — generate enough safe experiences to update the threat model
-- **Key insight for agents:** This user's body is running a continuous threat scan. Somatic data will show persistent activation in upper body zones. Pattern will be consistent across check-ins with low variability until therapeutic change begins.
+## T1: Living in Threat
 
-## Territory 2: Living in Shutdown
+```json
+{
+  "territory": "threat",
+  "number": 1,
+  "name": "Living in Threat",
+  "core_prediction": "Danger is coming. Safety is temporary.",
+  "affect_signature": {
+    "primary": ["FEAR↑", "SEEKING↓", "PLAY↓"],
+    "pattern": "Threat detection system dominates. Exploration and spontaneity suppressed."
+  },
+  "blanket_pattern": {
+    "type": "porosity",
+    "description": "Blanket too thin — external signals flood internal state."
+  },
+  "somatic_markers": ["upperChest", "jaw", "shoulders", "stomach", "neckFront"],
+  "sensation_qualities": ["tightness", "pressure", "buzzing", "heat", "pulsing"],
+  "clinical_risk": "moderate",
+  "status": "shipping"
+}
+```
 
-- **URI:** `cso:shutdown`
-- **Status:** Live (2.2)
-- **Predictive pattern:** Nothing will work. Effort is futile. The system has collapsed.
-- **Primary affects:** SEEKING (critically suppressed), PANIC/GRIEF (chronic, low-grade)
-- **Network configuration:** Reward network offline (nucleus accumbens hypoactive). Default mode dominant but in ruminative loop. Executive degraded. Motor system suppressed (psychomotor retardation).
-- **Somatic signature:** Heaviness (whole body), numbness, chest hollowness, limb heaviness, reduced interoceptive clarity, fatigue unrelated to exertion
-- **DSM correspondences:** F32 Major depressive episode, F34.1 Persistent depressive disorder
-- **Change mechanism:** SEEKING reactivation — smallest possible prediction errors to restart dopaminergic motivation
-- **Key insight for agents:** Low data volume expected (fewer check-ins). When data appears, look for heaviness + numbness + hollow. Absence of data IS data in this territory.
+## T2: Living in Shutdown
 
-## Territory 3: Living in Loss
+```json
+{
+  "territory": "shutdown",
+  "number": 2,
+  "name": "Living in Shutdown",
+  "core_prediction": "Nothing I do will matter. Effort and outcome are disconnected.",
+  "affect_signature": {
+    "primary": ["SEEKING↓↓", "PLAY↓"],
+    "pattern": "Motivation system suppressed. The brain conserves energy because it predicts effort won't produce reward."
+  },
+  "blanket_pattern": {
+    "type": "rigidity",
+    "description": "Blanket too thick — external signals dampened, internal state flat."
+  },
+  "somatic_markers": ["wholeBody", "upperChest", "lowerBack", "eyes"],
+  "sensation_qualities": ["heaviness", "numbness", "ache", "cold", "stillness"],
+  "clinical_risk": "moderate",
+  "status": "shipping"
+}
+```
 
-- **URI:** `cso:loss`
-- **Status:** Live (2.2)
-- **Predictive pattern:** The model of the world includes someone/something that is no longer there. The system keeps predicting their presence.
-- **Primary affects:** PANIC/GRIEF (acute), SEEKING (searching behavior)
-- **Network configuration:** Default mode hyperactive (replaying memories, searching for lost object). Hippocampus generating prediction errors (expecting presence, finding absence). Anterior insula processing the somatic weight of loss.
-- **Somatic signature:** Heart center ache, throat constriction, chest heaviness, waves of warmth/crying, hollow abdomen, sudden sharp sensations
-- **DSM correspondences:** F43.21 Adjustment disorder with depressed mood, prolonged grief (proposed)
-- **Change mechanism:** Model updating — the predictive model must slowly incorporate the permanent absence while preserving the meaning
-- **Key insight for agents:** Somatic data will show high variability (waves of activation). Heart center and throat are dominant zones. Intensity spikes may correlate with time-of-day or contextual triggers.
+## T3: Living in Loss
 
-## Territory 4: Living in Disconnection
+```json
+{
+  "territory": "loss",
+  "number": 3,
+  "name": "Living in Loss",
+  "core_prediction": "What was central to my world is gone. The model includes what is no longer there.",
+  "affect_signature": {
+    "primary": ["PANIC/GRIEF↑", "SEEKING variable"],
+    "pattern": "Separation distress active. SEEKING oscillates between searching for what's lost and collapsing."
+  },
+  "blanket_pattern": {
+    "type": "damage",
+    "description": "Blanket torn — a structural piece of the model is missing."
+  },
+  "somatic_markers": ["upperChest", "throat", "stomach", "eyes"],
+  "sensation_qualities": ["ache", "hollow", "heaviness", "tightness", "pressure"],
+  "clinical_risk": "moderate",
+  "status": "shipping"
+}
+```
 
-- **URI:** `cso:disconnection`
-- **Status:** Planned (2.3)
-- **Predictive pattern:** Closeness is predicted as dangerous. Vulnerability will be punished. Self-sufficiency is the only safety.
-- **Primary affects:** PANIC/GRIEF (suppressed — the system needs connection but has learned not to seek it), CARE (receiving is threatening)
-- **Network configuration:** Social cognition network disengaged from interoceptive network. Default mode active but dissociated from emotional processing. Amygdala responsive to intimacy cues (not just threat cues).
-- **Somatic signature:** Chest numbness, reduced interoceptive clarity, tension in hands/arms (holding back), throat constriction during vulnerability, warmth avoidance
-- **DSM correspondences:** Attachment-related presentations, avoidant patterns
-- **Change mechanism:** Trust-building through micro-vulnerability — the longest therapeutic arc in the framework
-- **Key insight for agents:** This user may produce low-affect somatic data even when internal distress is high. Numbness IS the signal. Look for discrepancy between reported wellbeing and somatic flatness.
+## T4: Living in Disconnection
 
-## Territory 5: Living in Overwhelm
+```json
+{
+  "territory": "disconnection",
+  "number": 4,
+  "name": "Living in Disconnection",
+  "core_prediction": "Depending on others is not safe. The need for connection is dangerous.",
+  "affect_signature": {
+    "primary": ["PANIC/GRIEF suppressed", "CARE↓"],
+    "pattern": "Attachment signal dampened. The need is present but the signal has been turned down."
+  },
+  "blanket_pattern": {
+    "type": "rigidity",
+    "description": "Blanket too thick — self-sufficiency as defense against relational pain."
+  },
+  "somatic_markers": ["upperChest", "shoulders", "hands", "stomach"],
+  "sensation_qualities": ["numbness", "cold", "hollow", "contraction"],
+  "clinical_risk": "moderate",
+  "status": "planned"
+}
+```
 
-- **URI:** `cso:overwhelm`
-- **Status:** Live (2.2)
-- **Predictive pattern:** The system's processing capacity has been exceeded. Inputs outpace the ability to integrate them.
-- **Primary affects:** Multiple systems competing simultaneously (FEAR + RAGE + PANIC/GRIEF), SEEKING fragmented
-- **Network configuration:** Salience network overwhelmed (everything flagged as urgent). Executive network in cascade failure. Interoceptive network flooded. Default mode fragmented.
-- **Somatic signature:** Diffuse whole-body activation, head pressure, chest tightness AND churning, simultaneous contradictory sensations, tingling + numbness co-occurring
-- **DSM correspondences:** F43.20 Adjustment disorder with anxiety, stress-related presentations
-- **Change mechanism:** Containment — reducing the prediction error load to a processable level, then systematically addressing one stream at a time
-- **Key insight for agents:** High-volume, high-variability somatic data. Multiple zones active simultaneously. The signature is chaos, not a specific pattern. Containment is the first priority.
+## T5: Living in Overwhelm
 
-## Territory 6: Living Under Siege
+```json
+{
+  "territory": "overwhelm",
+  "number": 5,
+  "name": "Living in Overwhelm",
+  "core_prediction": "Too much is happening. Regulatory capacity is exceeded.",
+  "affect_signature": {
+    "primary": ["All systems competing"],
+    "pattern": "Multiple emotional systems firing simultaneously. Undifferentiated activation storm."
+  },
+  "blanket_pattern": {
+    "type": "porosity",
+    "description": "Blanket too thin — everything gets through, nothing is filtered."
+  },
+  "somatic_markers": ["upperChest", "headScalp", "stomach", "jaw", "wholeBody"],
+  "sensation_qualities": ["buzzing", "heat", "pressure", "trembling", "nausea"],
+  "clinical_risk": "moderate",
+  "status": "shipping"
+}
+```
 
-- **URI:** `cso:siege`
-- **Status:** Live (2.2)
-- **Predictive pattern:** Fragmented prediction — the model itself has been damaged. The system cannot generate reliable predictions about safety.
-- **Primary affects:** FEAR (dominant, fragmented), PANIC/GRIEF (dissociated), RAGE (often suppressed)
-- **Network configuration:** Amygdala hyperactive with hippocampal disconnection (threat without context). Default mode fragmented (narrative discontinuity). Executive intermittently available. Dissociation as active inference (reducing unbearable prediction error).
-- **Somatic signature:** Dissociative numbness alternating with acute activation, pelvic floor tension, throat constriction, body areas that go "offline," startle responses in somatic data
-- **DSM correspondences:** F43.10 PTSD, F43.12 Complex PTSD, F44 Dissociative disorders
-- **Change mechanism:** Safety establishment first, then titrated prediction error within the window of tolerance
-- **Key insight for agents:** Highest clinical sensitivity territory. Somatic data may show sudden state changes (activation to numbness). NEVER push for more data. Respect missing data as protective.
+## T6: Living Under Siege
 
-## Territory 7: Living in Conflict
+```json
+{
+  "territory": "siege",
+  "number": 6,
+  "name": "Living Under Siege",
+  "core_prediction": "The past is still happening. The danger is not over.",
+  "affect_signature": {
+    "primary": ["FEAR locked", "All potentially dysregulated"],
+    "pattern": "Traumatic memory fires in present tense. Contextual encoding disrupted."
+  },
+  "blanket_pattern": {
+    "type": "damage",
+    "description": "Blanket torn — past intrudes through the boundary."
+  },
+  "somatic_markers": ["upperChest", "stomach", "throat", "wholeBody", "hands"],
+  "sensation_qualities": ["tightness", "numbness", "trembling", "cold", "floating", "pain"],
+  "clinical_risk": "critical",
+  "status": "shipping"
+}
+```
 
-- **URI:** `cso:conflict`
-- **Status:** Planned (2.3)
-- **Predictive pattern:** Competing predictions of equal weight — two or more models demanding contradictory action. Paralysis results from irresolvable prediction conflict.
-- **Primary affects:** SEEKING (split between options), RAGE (suppressed frustration), FEAR (of choosing wrong)
-- **Network configuration:** Executive network oscillating between competing action plans. Anterior cingulate hyperactive (conflict monitoring at maximum). Basal ganglia frozen (procedural system cannot select an action).
-- **Somatic signature:** Solar plexus churning, jaw tension, shoulder tension (bilateral), restlessness in legs, pressure in head/temples
-- **DSM correspondences:** Perfectionism, indecision, people-pleasing presentations
-- **Change mechanism:** Clarifying which prediction is authentic versus which is imposed — somatic resonance as the decision signal
-- **Key insight for agents:** Bilateral symmetry in somatic data (both shoulders, both arms). Solar plexus is the discriminating zone. Look for churning that resolves when one option is held in mind.
+## T7: Living in Conflict
 
-## Territory 8: Living in the Body Under Strain
+```json
+{
+  "territory": "conflict",
+  "number": 7,
+  "name": "Living in Conflict",
+  "core_prediction": "Two things are true simultaneously and they contradict each other.",
+  "affect_signature": {
+    "primary": ["SEEKING vs FEAR", "RAGE vs FEAR", "PANIC/GRIEF vs FEAR"],
+    "pattern": "Competing high-confidence predictions. Neither can win. Paralysis from bilateral activation."
+  },
+  "blanket_pattern": {
+    "type": "boundary",
+    "description": "Blanket misshapen — the boundary between competing needs is unclear."
+  },
+  "somatic_markers": ["solarPlexus", "upperChest", "jaw", "shoulders", "stomach"],
+  "sensation_qualities": ["tightness", "pressure", "heat", "ache", "contraction"],
+  "clinical_risk": "moderate",
+  "status": "planned"
+}
+```
 
-- **URI:** `cso:bodyStrain`
-- **Status:** Live (2.2)
-- **Predictive pattern:** The body itself is the source of unpredictable threat. Pain predictions drive avoidance, avoidance drives deconditioning, deconditioning increases pain.
-- **Primary affects:** FEAR (of pain/sensation), SEEKING (suppressed by pain avoidance)
-- **Network configuration:** Interoceptive network hypersensitive (precision weighting on pain signals extremely high). PAG dysregulated. Motor network inhibited (fear-avoidance). Somatosensory cortex expanded for pain regions.
-- **Somatic signature:** Pain zones dominant, tension surrounding pain areas (guarding), reduced movement-related sensations, intensity ratings higher than other territories
-- **DSM correspondences:** Chronic pain conditions, somatic symptom disorder, fibromyalgia presentations
-- **Change mechanism:** Graded somatic exposure — slowly reducing the precision weighting on pain predictions through safe body engagement
-- **Key insight for agents:** Intensity ratings will be higher than other territories. Focus zones will be consistent and specific. Look for gradual expansion of body awareness beyond pain zones as therapeutic signal.
+## T8: Living in the Body Under Strain
 
-## Territory 9: Living in a System Under Pressure
+```json
+{
+  "territory": "body",
+  "number": 8,
+  "name": "Living in the Body Under Strain",
+  "core_prediction": "My body is the problem. The body is a source of suffering, not information.",
+  "affect_signature": {
+    "primary": ["Variable by presentation"],
+    "pattern": "Brain maintains high-confidence pain/body prediction that persists after tissue healing or distorts body perception."
+  },
+  "blanket_pattern": {
+    "type": "mismatch",
+    "description": "Existential/neurological — the brain's body model doesn't match the body's reality."
+  },
+  "somatic_markers": ["variable — depends on pain/image/eating presentation"],
+  "sensation_qualities": ["pain", "tightness", "ache", "numbness", "pressure"],
+  "clinical_risk": "moderate",
+  "status": "shipping"
+}
+```
 
-- **URI:** `cso:systemPressure`
-- **Status:** Planned (2.3)
-- **Predictive pattern:** The threat is accurate and external — systemic stressors, discrimination, caregiving burden, financial precarity. The nervous system is correctly reading the environment.
-- **Primary affects:** FEAR (reality-based), RAGE (at injustice), CARE (depleted from caregiving)
-- **Network configuration:** Salience network accurately calibrated (not hyperactive — the threats are real). Executive network overtaxed by coping demands. Default mode suppressed by constant vigilance. Hypothalamus chronically activated (allostatic load).
-- **Somatic signature:** Chronic upper back/shoulder tension, jaw clenching, fatigue, headaches, lower back strain, stomach distress
-- **DSM correspondences:** Adjustment disorder, burnout, caregiver stress
-- **Change mechanism:** Ecological intervention — the somatic patterns won't resolve without addressing the environmental sources. Somatic work focuses on regulation capacity under ongoing stress.
-- **Key insight for agents:** Context chips are essential for this territory. Somatic data without ecological context will look like T1 (threat). The distinguishing factor is that the threat prediction is ACCURATE.
+## T9: Living in a System Under Pressure
 
-## Territory 10: Living in Transition
+```json
+{
+  "territory": "systemPressure",
+  "number": 9,
+  "name": "Living in a System Under Pressure",
+  "core_prediction": "The stress is real. The environment is genuinely adverse.",
+  "affect_signature": {
+    "primary": ["System-appropriate response (not pathological)"],
+    "pattern": "Threat predictions are accurate. The alarm is not malfunctioning. The building is actually on fire."
+  },
+  "blanket_pattern": {
+    "type": "porosity",
+    "description": "Blanket too thin — but appropriately so. The external state IS threatening."
+  },
+  "somatic_markers": ["shoulders", "jaw", "upperBack", "lowerBack", "headScalp"],
+  "sensation_qualities": ["tightness", "heaviness", "ache", "pressure", "heat"],
+  "clinical_risk": "low",
+  "status": "planned",
+  "clinical_note": "NEVER frame regulation as 'calming down.' Frame as 'building resources for staying present in a hard situation.'"
+}
+```
 
-- **URI:** `cso:transition`
-- **Status:** Planned (2.3)
-- **Predictive pattern:** Pervasive model obsolescence — the previous model of the world no longer works and no replacement has formed. Groundlessness.
-- **Primary affects:** PANIC/GRIEF (for the lost model), SEEKING (tentative, directionless), FEAR (of the unknown)
-- **Network configuration:** Default mode in reconstruction (old self-narrative dissolving). Hippocampus generating high prediction error (environment no longer matches expectations). Executive available but without clear objectives.
-- **Somatic signature:** Floating/ungrounded sensations, chest hollowness, feet/leg instability, variable patterns that shift daily, reduced body clarity
-- **DSM correspondences:** Adjustment disorder, identity disturbance, life transition presentations
-- **Change mechanism:** Tolerate the groundlessness while the new model builds — somatic anchoring as the stable base during reconstruction
-- **Key insight for agents:** High variability across days. No stable somatic pattern is the pattern. Life transition data from context chips is critical for interpretation.
+## T10: Living in Transition
 
-## Territory 11: Living in Shame
+```json
+{
+  "territory": "transition",
+  "number": 10,
+  "name": "Living in Transition",
+  "core_prediction": "My model of the world is obsolete. The operating system is being rewritten while I still need to function.",
+  "affect_signature": {
+    "primary": ["SEEKING disrupted", "PANIC/GRIEF active"],
+    "pattern": "Global model revision. Every familiar context generates mismatch. Groundlessness as primary somatic signature."
+  },
+  "blanket_pattern": {
+    "type": "boundary",
+    "description": "Blanket misshapen — the old shape no longer fits, the new shape hasn't formed."
+  },
+  "somatic_markers": ["stomach", "upperChest", "feet", "wholeBody"],
+  "sensation_qualities": ["floating", "hollow", "heaviness", "buzzing", "nausea"],
+  "clinical_risk": "moderate",
+  "status": "planned",
+  "clinical_note": "Distinct from T3: T3 = specific object lost. T10 = entire predictive model obsolete."
+}
+```
 
-- **URI:** `cso:shame`
-- **Status:** Planned (2.3)
-- **Predictive pattern:** Core self-model: "I am fundamentally defective." All social interactions filtered through this prediction. Exposure = annihilation.
-- **Primary affects:** PANIC/GRIEF (existential), FEAR (of being seen), RAGE (turned inward)
-- **Network configuration:** Default mode locked in negative self-referential processing. Social cognition network hyperactive (constant monitoring of others' reactions). Anterior insula processing visceral shame response. Executive used for concealment rather than engagement.
-- **Somatic signature:** Face/neck flushing (even without visible blushing), chest collapse, gaze aversion (reported as eye/head tension), stomach churning, impulse to shrink/hide (whole body constriction)
-- **DSM correspondences:** Social anxiety (shame-based), avoidant personality patterns
-- **Change mechanism:** Exposure to being seen without the predicted annihilation — the prediction error that "I was visible and survived"
-- **Key insight for agents:** Somatic data may be sparse (shame inhibits reporting). Look for upper chest + face/neck + stomach co-activation. Shame often co-occurs with other territories (T1, T4, T6).
+## T11: Living in Shame
 
-## Territory 12: Living in Addiction and Compulsion
+```json
+{
+  "territory": "shame",
+  "number": 11,
+  "name": "Living in Shame",
+  "core_prediction": "I am fundamentally defective. If people really saw me, they would leave.",
+  "affect_signature": {
+    "primary": ["PANIC/GRIEF active", "Self-model damage"],
+    "pattern": "Parasympathetic withdrawal response: shrinking, heat in face, gaze aversion. Social submission signal."
+  },
+  "blanket_pattern": {
+    "type": "damage",
+    "description": "Blanket torn — the self-model itself is wounded."
+  },
+  "somatic_markers": ["forehead", "eyes", "upperChest", "stomach", "throat"],
+  "sensation_qualities": ["heat", "contraction", "heaviness", "hollow", "nausea"],
+  "clinical_risk": "high",
+  "status": "planned",
+  "clinical_note": "The word 'should' is banned in T11 content. Every string reviewed for inadvertent shame amplification."
+}
+```
 
-- **URI:** `cso:addiction`
-- **Status:** Planned (2.3)
-- **Predictive pattern:** SEEKING system hijacked — the substance/behavior has become the predicted solution to an underlying territory's distress. The cycle: underlying territory activates → craving → use → temporary relief → underlying territory returns.
-- **Primary affects:** SEEKING (hijacked toward substance/behavior), underlying territory affect
-- **Network configuration:** Reward network dominated by substance/behavior prediction. Prefrontal regulation degraded. Basal ganglia encoding compulsive routine. The underlying territory's network configuration runs beneath.
-- **Somatic signature:** Craving has a somatic signature (usually in the zone associated with the underlying territory, plus hands/mouth/stomach). Post-use: brief somatic relief followed by return of underlying pattern.
-- **DSM correspondences:** F10-F19 Substance use disorders, F63 Impulse control disorders
-- **Change mechanism:** Identify and treat the underlying territory — the addiction is the active inference solution, not the problem
-- **Key insight for agents:** Always look for the territory BENEATH the addiction. The somatic data during craving often reveals the underlying territory's signature. T12 never exists alone.
+## T12: Living in Addiction and Compulsion
 
-## Territory 13: Living Behind a Mask
+```json
+{
+  "territory": "addiction",
+  "number": 12,
+  "name": "Living in Addiction and Compulsion",
+  "core_prediction": "This substance/behavior reliably changes my state when nothing else does.",
+  "affect_signature": {
+    "primary": ["SEEKING hijacked"],
+    "pattern": "Reward architecture captured. Natural pleasure sources precision-weighted downward. Craving is SEEKING activating toward predicted reward."
+  },
+  "blanket_pattern": {
+    "type": "boundary",
+    "description": "Blanket misshapen — the boundary between need and compulsion is blurred."
+  },
+  "somatic_markers": ["stomach", "upperChest", "throat", "hands", "jaw"],
+  "sensation_qualities": ["pulsing", "heat", "tightness", "buzzing", "ache"],
+  "clinical_risk": "critical",
+  "status": "planned",
+  "clinical_note": "Day 1 withdrawal risk screening required. Withdrawal indicators → immediate ResourceCatalog escalation. No program content until medical safety confirmed."
+}
+```
 
-- **URI:** `cso:mask`
-- **Status:** Planned (2.3)
-- **Predictive pattern:** Core prediction: authentic self is unacceptable. Performance is survival. The gap between performed self and felt self generates chronic somatic tension.
-- **Primary affects:** FEAR (of exposure), SEEKING (for validation of performed self), PANIC/GRIEF (for the hidden self)
-- **Network configuration:** Executive network chronically engaged in performance maintenance. Default mode split (performed narrative vs. suppressed authentic processing). Social cognition hyperactive for audience monitoring.
-- **Somatic signature:** Jaw tension (controlling expression), throat constriction (controlling voice), chest split (felt vs. performed), facial tension, exhaustion from chronic performance
-- **DSM correspondences:** Burnout, identity disturbance, some personality disorder presentations
-- **Change mechanism:** Safe contexts where the mask can lower — moments where authenticity doesn't produce the predicted punishment
-- **Key insight for agents:** Look for somatic discrepancy: reported state ("I'm fine") contradicted by somatic data (chest tightness, jaw tension, throat constriction). The gap IS the territory.
+## T13: Living Behind a Mask
 
-## Territory 14: Living With an Altered Body/Mind
+```json
+{
+  "territory": "mask",
+  "number": 13,
+  "name": "Living Behind a Mask",
+  "core_prediction": "My authentic self is unacceptable. The performance is the only safe option.",
+  "affect_signature": {
+    "primary": ["SEEKING intact but misdirected", "PLAY↓"],
+    "pattern": "Self-monitoring system oriented externally. Interoceptive signal overridden by social performance signal."
+  },
+  "blanket_pattern": {
+    "type": "rigidity",
+    "description": "Blanket too thick — authentic signals cannot reach the surface."
+  },
+  "somatic_markers": ["jaw", "shoulders", "upperChest", "throat"],
+  "sensation_qualities": ["tightness", "numbness", "hollow", "contraction"],
+  "clinical_risk": "moderate",
+  "status": "planned",
+  "clinical_note": "L1 innovation: two-body-scan — first the 'social body' (performance), then the 'deeper body' (underneath). The gap is the therapeutic data."
+}
+```
 
-- **URI:** `cso:alteredBodyMind`
-- **Status:** Planned (2.3)
-- **Predictive pattern:** The body or mind operates differently from the dominant model. The pathology is not in the person — it's in the fit between the person and the environment's expectations.
-- **Primary affects:** RAGE (at mismatch), PANIC/GRIEF (for lost normality or unachievable normality), SEEKING (for accommodation and understanding)
-- **Network configuration:** Varies widely by presentation. Common: interoceptive network processing signals that don't match the expected model, executive network compensating for processing differences, social cognition navigating non-standard interaction patterns.
-- **Somatic signature:** Highly individual. The key is the person's relationship to their body's signals, not the signals themselves. Sensory sensitivities, fatigue patterns, and pain patterns specific to condition.
-- **DSM correspondences:** Neurodevelopmental disorders, chronic illness, acquired disability
-- **Change mechanism:** Recalibrating the self-model to include the body/mind as it IS rather than as it "should be" — reducing the prediction error between expected and actual embodiment
-- **Key insight for agents:** Do NOT interpret somatic data through a neurotypical lens. Baseline patterns will be unique to the individual. Track relative change, not absolute values.
+## T14: Living With an Altered Body/Mind
 
-## Territory 15: Living in Existential Confrontation
+```json
+{
+  "territory": "alteredBodyMind",
+  "number": 14,
+  "name": "Living With an Altered Body/Mind",
+  "core_prediction": "My brain/body works differently from what the world expects. The mismatch is exhausting.",
+  "affect_signature": {
+    "primary": ["Context-dependent"],
+    "pattern": "Brain's predictions are accurate for how the nervous system actually works. The pathology is in the fit, not the person."
+  },
+  "blanket_pattern": {
+    "type": "mismatch",
+    "description": "Environment-person mismatch — the world was designed for a different neurological profile."
+  },
+  "somatic_markers": ["variable — depends on neurotype and condition"],
+  "sensation_qualities": ["buzzing", "heaviness", "pressure", "pain", "numbness"],
+  "clinical_risk": "low",
+  "status": "planned",
+  "clinical_note": "NEVER pathologize. NEVER frame as 'managing symptoms.' Frame as 'building capacity to work WITH how your system operates.'"
+}
+```
 
-- **URI:** `cso:existential`
-- **Status:** Planned (2.3)
-- **Predictive pattern:** Accurate perception of mortality, meaninglessness, isolation, or freedom (Yalom's four existential concerns). The anxiety is philosophically valid, not pathological.
-- **Primary affects:** FEAR (of nonexistence), SEEKING (for meaning), PANIC/GRIEF (for the finite)
-- **Network configuration:** Default mode in expanded processing (big-picture, abstract). Prefrontal areas engaged in meaning-making. Salience network may be quiet (the threat is abstract, not immediate). Interoceptive network processing the somatic weight of awareness.
-- **Somatic signature:** Chest heaviness without panic qualities, hollow sensation (existential emptiness is felt in the body), whole-body awareness, groundlessness without acute distress
-- **DSM correspondences:** Existential crisis, post-trauma meaning reconstruction, terminal illness adjustment
-- **Change mechanism:** The somatic encounter with groundlessness itself — learning to inhabit the body knowing it is temporary
-- **Key insight for agents:** This is not pathology. Somatic data will show contemplative activation, not threat activation. Do not route toward anxiety interventions. The work is integration, not reduction.
+## T15: Living in Existential Confrontation
 
-## Territory 16: Living With a Changing Brain
+```json
+{
+  "territory": "existential",
+  "number": 15,
+  "name": "Living in Existential Confrontation",
+  "core_prediction": "The prediction error is not an error. I am accurately perceiving fundamental features of human existence.",
+  "affect_signature": {
+    "primary": ["Variable — high engagement, accurate perception"],
+    "pattern": "Implicit buffering predictions (the world is meaningful, death is far away) have failed. Full awareness floods in."
+  },
+  "blanket_pattern": {
+    "type": "limit",
+    "description": "Model limit — the brain encounters what it cannot predict or resolve."
+  },
+  "somatic_markers": ["upperChest", "stomach", "throat", "wholeBody"],
+  "sensation_qualities": ["heaviness", "hollow", "ache", "stillness", "expansion"],
+  "clinical_risk": "moderate",
+  "status": "planned",
+  "clinical_note": "Program cannot and should not resolve existential realities. Builds capacity to be present with them. Distinguish carefully from T2 (shutdown)."
+}
+```
 
-- **URI:** `cso:changingBrain`
-- **Status:** Deferred (4.0)
-- **Predictive pattern:** The predictive model itself is deteriorating. Cognitive decline creates a progressive gap between prediction and reality. The person may or may not be aware of the gap.
-- **Primary affects:** FEAR (of loss of self), PANIC/GRIEF (for lost capacities), SEEKING (for familiar patterns)
-- **Network configuration:** Progressive network degradation pattern-dependent on diagnosis. Default mode losing coherence. Executive declining. Hippocampal function degrading (new predictions harder to form). Core affect systems relatively preserved (emotional capacity outlasts cognitive).
-- **Somatic signature:** Confusion-related tension, agitation patterns, preserved somatic responses to familiar stimuli, increasing reliance on body-based (procedural) memory as declarative fades
-- **DSM correspondences:** Neurocognitive disorders (all stages)
-- **Change mechanism:** Core self vs. autobiographical self distinction — somatic work targets the preserved core self while the autobiographical self changes
-- **Key insight for agents:** Requires caregiver integration (4.0 architecture). The user may not be the primary data reporter. Simplified interfaces, preserved routines, and body-based (not cognitive) approaches.
+## T16: Living With a Changing Brain
+
+```json
+{
+  "territory": "changingBrain",
+  "number": 16,
+  "name": "Living With a Changing Brain",
+  "core_prediction": "My brain's model of its own cognitive capacity no longer matches actual performance.",
+  "affect_signature": {
+    "primary": ["Variable — cognitive capacity shifts"],
+    "pattern": "Every failed cognitive prediction (word not found, purpose forgotten) generates prediction error, frustration, and fear."
+  },
+  "blanket_pattern": {
+    "type": "limit",
+    "description": "Progressive change — the model must continuously update as capacity shifts."
+  },
+  "somatic_markers": ["headScalp", "forehead", "upperChest", "hands"],
+  "sensation_qualities": ["pressure", "tightness", "numbness", "buzzing", "heaviness"],
+  "clinical_risk": "high",
+  "status": "deferred",
+  "clinical_note": "Deferred to v4.0. Core self (body-based, moment-to-moment) persists even through significant cognitive decline. Body-based practices remain accessible when cognitive ones do not."
+}
+```
+
+---
+
+*CSO v1.1 — March 2026*
+
+*© 2026 Cathexis Health. CC BY-NC-SA 4.0.*

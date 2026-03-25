@@ -1,83 +1,75 @@
 # mcp-somatic
 
-**Somatic Intelligence Vocabulary for AI Agents**
+**The somatic vocabulary for AI agents.**
 
-A structured vocabulary and agent guidance specification for building somatic-aware AI systems using the Model Context Protocol (MCP).
+This repository defines the machine-readable vocabulary, territory profiles, and agent guidance for building somatic-aware AI systems using the Cathexis Model Context Protocol (MCP) server.
 
 ## What This Is
 
-This repository defines the vocabulary, territory profiles, and integration patterns that enable AI agents to understand, interpret, and respond to human somatic (body-based) data. It is the developer-facing companion to the [Cathexis Somatic Ontology (CSO)](https://doi.org/10.5281/zenodo.19157529), the first published formal ontology for computational somatic therapeutics.
+The Cathexis Somatic Ontology (CSO) is a formal vocabulary for representing body-based therapeutic experience in computational systems. It defines 29 anatomical zones, 20 sensation qualities, 7 primary affect systems, 16 territories of human experience, and a Markov blanket framework — all grounded in seven research programs in affective neuroscience and predictive processing.
 
-## Contents
+The MCP server runs locally on the user's iOS device. Your AI agent connects via Bonjour/mDNS on local WiFi and queries structured somatic data with the user's explicit consent.
 
-| File | Purpose |
-|------|---------|
-| `SOMATIC_ONTOLOGY.md` | Developer reference for CSO v1.1: 29 body zones, 20 sensation qualities, URI scheme, data structures, and integration patterns |
-| `TERRITORY_PROFILES.md` | All 16 territories of human experience in machine-readable format: predictive patterns, affect configurations, somatic signatures, network configurations |
-| `AGENT_GUIDANCE.md` | How to build somatic-aware agents: connection patterns, data interpretation, clinical safety constraints, response guidelines |
+## Repository Contents
+
+| File | Contents |
+|------|----------|
+| `SOMATIC_ONTOLOGY.md` | Complete CSO vocabulary: 29 zones, 20 sensation qualities, blanket framework, affect systems, brain regions, ecological layers |
+| `TERRITORY_PROFILES.md` | All 16 territory profiles in machine-readable format with affect signatures, blanket patterns, and somatic markers |
+| `AGENT_GUIDANCE.md` | How to build somatic-aware agents: permission model, tool reference, territory-specific behavior, safety boundaries |
 | `README.md` | This file |
 
-## Theoretical Foundation
+## Quick Start
 
-The vocabulary is grounded in seven major research programs:
+1. Install Cathexis on an iOS device (App Store)
+2. Open Profile → AI Integration → Enable MCP Server
+3. Your MCP client discovers the server via Bonjour on local WiFi
+4. The user approves the connection and sets permission level (L1–L4)
+5. Query somatic data using the 11 published tools
 
-1. **Constructed emotion theory** (Barrett) — emotions are constructed from interoceptive signals, not triggered by events
-2. **Predictive processing / active inference** (Friston) — the brain generates probabilistic models and updates them through prediction error
-3. **Primary affect systems** (Panksepp) — seven genetically encoded motivational systems (SEEKING, FEAR, RAGE, PANIC/GRIEF, CARE, PLAY, LUST)
-4. **Somatic markers** (Damasio) — body states serve as decision-making signals
-5. **Neuropsychoanalysis** (Solms) — consciousness arises from subcortical affect systems
-6. **The entangled brain** (Pessoa) — brain function emerges from dynamic, distributed network coalitions, not single regions
-7. **Memory systems** (Kandel, Nader, Schiller, Ecker) — reconsolidation as the mechanism for therapeutic change
+Claude Desktop connects natively. Any MCP-compatible client works.
 
 ## Namespace
 
-All CSO terms resolve under: `https://cathexis.health/ontology/cso/v1.1/`
+**CSO Namespace URI:** `https://cathexis.health/ontology/cso/`
 
-Machine-readable formats (OWL, JSON-LD, Turtle) are published alongside the White Paper on Zenodo.
+**BioPortal:** [CXSO on BioPortal](https://bioportal.bioontology.org/ontologies/CXSO)
 
-## Connection to Cathexis
+**Zenodo DOI:** [10.5281/zenodo.19157529](https://doi.org/10.5281/zenodo.19157529) (White Paper v2, CC BY-NC-SA 4.0)
 
-The Cathexis iOS app exposes an MCP server that AI agents can connect to over the local network. When connected, agents can:
+Machine-readable formats: OWL, Turtle, JSON-LD — all available at the Zenodo DOI.
 
-- Read the user's somatic check-in history (with explicit user permission)
-- Access pattern detection results from the clinical intelligence system
-- Retrieve territory profiles and therapeutic trajectory data
-- Stream real-time somatic state changes via SSE
+## Published Materials
 
-This repository provides the vocabulary an agent needs to interpret that data meaningfully.
-
-## Clinical Safety
-
-**This vocabulary describes somatic experience. It does not qualify an agent to provide therapy.**
-
-Any agent consuming somatic data must:
-
-- Never diagnose, label, or pathologize the user's experience
-- Never override or contradict the platform's clinical intelligence system
-- Respect the user's permission level (L1/L2/L3) and never request elevation
-- Treat all somatic data as sensitive health information
-- Defer to licensed clinicians for all clinical decisions
-
-See `AGENT_GUIDANCE.md` for complete safety constraints.
+| Document | Location |
+|----------|----------|
+| Somatic Ontology White Paper v2 | [Zenodo DOI: 10.5281/zenodo.19157529](https://doi.org/10.5281/zenodo.19157529) |
+| HEF Clinical Manual | [Zenodo DOI: 10.5281/zenodo.19157697](https://doi.org/10.5281/zenodo.19157697) |
+| CSO on BioPortal | [CXSO](https://bioportal.bioontology.org/ontologies/CXSO) |
+| HEF Community Guide | [cathexis.health/hef](https://cathexis.health/hef) |
+| Provider Integration Guide | [cathexis.health/providers](https://cathexis.health/providers) |
 
 ## License
 
-This repository is private. All content is proprietary to Cathexis Health.
+**Vocabulary layer (this repository):** CC BY-NC-SA 4.0. Use the zones, qualities, territories, and affect system vocabulary in your agents and research. Attribution required. Non-commercial use.
 
-**Academic publications:** The Cathexis Somatic Ontology White Paper and HEF Clinical Manual are published under CC BY-NC-SA 4.0 on Zenodo.
+**Clinical implementation (Cathexis app):** Proprietary. The intervention graphs, LINK detection logic, Bayesian inference pipeline, and therapeutic content are not included in this repository.
 
-**Future open-source timeline:** Selected vocabulary components (zone taxonomy, sensation qualities, basic territory definitions) are planned for open-source release under CC BY-NC-SA 4.0 after the Cathexis platform reaches version 3.0 and the first validation study is published. Detection algorithms, clinical decision thresholds, intervention routing logic, and safety gate parameters will remain proprietary.
+## Version
 
-## Citation
+- **CSO:** v1.1 (March 2026)
+- **MCP Server:** 11 tools, 4 resources, 1 prompt, SSE streaming
+- **App:** Cathexis 2.3.0+ on the App Store
 
-```
-DeGarbo, J. (2026). A somatic ontology for computational therapeutics:
-Formalizing body-based experience for digital mental health (Version 2.0).
-Cathexis Health. https://doi.org/10.5281/zenodo.19157529
-```
+## Links
 
-## Contact
+- **Website:** [cathexis.health](https://cathexis.health)
+- **For Developers:** [cathexis.health/developers](https://cathexis.health/developers)
+- **App Store:** [Download Cathexis](https://cathexis.health/download)
+- **Support:** support@cathexis.health
 
-support@cathexis.health
+---
 
-CATHEXIS is a trademark of Justin DeGarbo.
+*Sensation before emotion. Curiosity over judgment. Adaptation over pathology.*
+
+© 2026 Cathexis Health. All rights reserved.

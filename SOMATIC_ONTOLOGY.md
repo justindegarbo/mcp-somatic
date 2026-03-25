@@ -1,222 +1,226 @@
-# Cathexis Somatic Ontology (CSO) v1.1 — Developer Reference
+# Cathexis Somatic Ontology (CSO) v1.1
 
-**Namespace:** `https://cathexis.health/ontology/cso/v1.1/`
-**Published:** Zenodo DOI [10.5281/zenodo.19157529](https://doi.org/10.5281/zenodo.19157529)
-**Formats:** OWL (Turtle), OWL/XML, JSON-LD
+**Namespace:** `https://cathexis.health/ontology/cso/`
 
-## Overview
+**BioPortal:** [CXSO](https://bioportal.bioontology.org/ontologies/CXSO)
 
-The CSO defines the vocabulary for representing body-based therapeutic experience computationally. It contains 17 classes and 133 individuals organized within a Markov blanket framework (Friston's free energy principle).
+**Zenodo DOI:** [10.5281/zenodo.19157529](https://doi.org/10.5281/zenodo.19157529)
 
-An agent that understands the CSO can interpret structured somatic observations: where in the body a sensation is occurring, what quality it has, what neurobiological territory it maps to, and what therapeutic trajectory the user is on.
+---
 
-## Body Zones (29)
+## 1. Body Zones (29)
 
-Each zone maps to an anatomical region with clinical significance for somatic therapy.
+Anatomical regions for somatic check-in. Each zone maps to a position on the interactive body map silhouette. Users tap to select zones and report sensation quality + intensity.
 
-| # | Zone | URI | Clinical Significance |
-|---|------|-----|----------------------|
-| 1 | Head/Forehead | `cso:headForehead` | Cognitive overload, tension headache, dissociation |
-| 2 | Eyes | `cso:eyes` | Hypervigilance, tear suppression, visual narrowing |
-| 3 | Jaw/Mouth | `cso:jawMouth` | Clenching, anger suppression, verbal inhibition |
-| 4 | Temples | `cso:temples` | Stress response, temporal tension, TMJ referral |
-| 5 | Ears | `cso:ears` | Auditory sensitivity, tinnitus under stress |
-| 6 | Throat/Neck | `cso:throatNeck` | Voice suppression, swallowing difficulty, vulnerability |
-| 7 | Back of Neck | `cso:backOfNeck` | Hypervigilance, fight-or-flight, postural guarding |
-| 8 | Left Shoulder | `cso:leftShoulder` | Burden-bearing, emotional weight, protective posture |
-| 9 | Right Shoulder | `cso:rightShoulder` | Action-oriented tension, responsibility, effort |
-| 10 | Upper Chest | `cso:upperChest` | Anxiety, breath restriction, cardiac awareness |
-| 11 | Heart Center | `cso:heartCenter` | Grief, longing, emotional openness/closure |
-| 12 | Solar Plexus | `cso:solarPlexus` | Core anxiety, gut instinct, power center |
-| 13 | Upper Back | `cso:upperBack` | Emotional armoring, grief storage, postural collapse |
-| 14 | Mid-Back | `cso:midBack` | Structural support, fatigue, unexpressed emotion |
-| 15 | Lower Back | `cso:lowerBack` | Foundation, safety, chronic pain, support deficit |
-| 16 | Left Upper Arm | `cso:leftUpperArm` | Reaching/withdrawing, connection-seeking |
-| 17 | Right Upper Arm | `cso:rightUpperArm` | Action, pushing away, boundary-setting |
-| 18 | Hands/Fingers | `cso:handsFingers` | Fine motor anxiety, gripping, releasing |
-| 19 | Abdomen | `cso:abdomen` | Visceral emotion, nausea, gut-brain axis |
-| 20 | Pelvis/Hips | `cso:pelvisHips` | Stability, sexuality, stored trauma, grounding |
-| 21 | Left Thigh | `cso:leftThigh` | Forward movement, support, large muscle tension |
-| 22 | Right Thigh | `cso:rightThigh` | Forward movement, support, large muscle tension |
-| 23 | Knees | `cso:knees` | Flexibility, rigidity, submission, collapse |
-| 24 | Calves/Shins | `cso:calvesShins` | Readiness to move, restlessness, grounding |
-| 25 | Feet | `cso:feet` | Grounding, foundation, connection to earth |
-| 26 | Pelvic Floor | `cso:pelvicFloor` | Trauma storage, safety, autonomic regulation |
-| 27 | Inner Ear/Vestibular | `cso:innerEarVestibular` | Balance, disorientation, dissociation |
-| 28 | Whole Body | `cso:wholeBody` | Systemic activation, diffuse sensation |
-| 29 | Internal/Visceral | `cso:internalVisceral` | Deep organ sensation, interoceptive signals |
+### Canonical Zones
 
-**Expansion zones (26-29)** were added in CSO v1.1 based on clinical observation of underrepresented somatic patterns.
+| # | CSO Term | Code (`BodyZone`) | Display Name | Body Region |
+|---|----------|-------------------|--------------|-------------|
+| 1 | `cso:headScalp` | `headScalp` | Head / Scalp | Head |
+| 2 | `cso:forehead` | `forehead` | Forehead | Head |
+| 3 | `cso:eyes` | `eyes` | Eyes | Head |
+| 4 | `cso:jaw` | `jaw` | Jaw | Head |
+| 5 | `cso:mouthLips` | `mouthLips` | Mouth / Lips | Head |
+| 6 | `cso:throat` | `throat` | Throat | Neck |
+| 7 | `cso:neckFront` | `neckFront` | Neck (Front) | Neck |
+| 8 | `cso:neckBack` | `neckBack` | Neck (Back) | Neck |
+| 9 | `cso:shoulders` | `shoulders` | Shoulders | Upper Body |
+| 10 | `cso:upperChest` | `upperChest` | Upper Chest | Torso |
+| 11 | `cso:solarPlexus` | `solarPlexus` | Solar Plexus | Torso |
+| 12 | `cso:stomach` | `stomach` | Stomach | Torso |
+| 13 | `cso:lowerAbdomen` | `lowerAbdomen` | Lower Abdomen | Torso |
+| 14 | `cso:upperBack` | `upperBack` | Upper Back | Back |
+| 15 | `cso:lowerBack` | `lowerBack` | Lower Back | Back |
+| 16 | `cso:upperArms` | `upperArms` | Arms (Upper) | Arms |
+| 17 | `cso:forearms` | `forearms` | Forearms | Arms |
+| 18 | `cso:hands` | `hands` | Hands | Arms |
+| 19 | `cso:hips` | `hips` | Hips | Lower Body |
+| 20 | `cso:upperLegs` | `upperLegs` | Upper Legs | Legs |
+| 21 | `cso:knees` | `knees` | Knees | Legs |
+| 22 | `cso:lowerLegs` | `lowerLegs` | Lower Legs | Legs |
+| 23 | `cso:feet` | `feet` | Feet | Legs |
+| 24 | `cso:pelvicFloor` | `pelvicFloor` | Pelvic Floor | Torso |
+| 25 | `cso:vestibular` | `vestibular` | Vestibular / Balance | Head (Internal) |
+| 26 | `cso:heart` | `heart` | Heart | Torso (Internal) |
+| 27 | `cso:diaphragm` | `diaphragm` | Diaphragm | Torso (Internal) |
+| 28 | `cso:wholeBody` | `wholeBody` | Whole Body | Global |
+| 29 | `cso:unspecified` | `unspecified` | Can't Pinpoint | Unlocalized |
 
-## Sensation Qualities (20)
+Zones 24–27 (pelvicFloor, vestibular, heart, diaphragm) were added in v2.3 to support interoceptive awareness of deep body structures and equilibrium. Zone 28 (wholeBody) captures diffuse, non-localizable activation. Zone 29 (unspecified) captures "I feel something but can't say where" — itself clinically significant data.
 
-Phenomenological descriptors for what a sensation feels like.
+---
 
-| Quality | URI | Category |
-|---------|-----|----------|
-| Tightness | `cso:tightness` | Constriction |
-| Pressure | `cso:pressure` | Constriction |
-| Heaviness | `cso:heaviness` | Weight |
-| Lightness | `cso:lightness` | Weight |
-| Warmth | `cso:warmth` | Temperature |
-| Coolness | `cso:coolness` | Temperature |
-| Tingling | `cso:tingling` | Activation |
-| Numbness | `cso:numbness` | Absence |
-| Pain | `cso:pain` | Nociception |
-| Ache | `cso:ache` | Nociception |
-| Buzzing | `cso:buzzing` | Activation |
-| Pulsing | `cso:pulsing` | Rhythm |
-| Churning | `cso:churning` | Movement |
-| Hollow | `cso:hollow` | Absence |
-| Sharp | `cso:sharp` | Acute |
-| Burning | `cso:burning` | Temperature (extreme) |
-| Floating | `cso:floating` | Dissociation |
-| Trembling | `cso:trembling` | Activation |
-| Constriction | `cso:constriction` | Constriction |
-| Expansion | `cso:expansion` | Opening |
+## 2. Sensation Qualities (20)
 
-**Expansion qualities (16-20)** were added in CSO v1.1 for temperature extremes, dissociative states, and autonomic activation patterns.
+Phenomenological descriptors for what the user notices in a body zone. These are raw interoceptive signal descriptions, not emotions. The sensation is the data; the emotion is the user's construction.
 
-## Primary Affect Systems (7)
+### Original Qualities (15)
 
-Panksepp's genetically encoded motivational systems. URI convention: UPPERCASE.
+| # | CSO Term | Code (`SensationQuality`) | Display Name | Animation Family |
+|---|----------|--------------------------|--------------|-----------------|
+| 1 | `cso:tightness` | `tightness` | Tightness | concentric |
+| 2 | `cso:heat` | `heat` | Heat | radial |
+| 3 | `cso:cold` | `cold` | Cold | crystalline |
+| 4 | `cso:pressure` | `pressure` | Pressure | gradient |
+| 5 | `cso:tingling` | `tingling` | Tingling | particle |
+| 6 | `cso:numbness` | `numbness` | Numbness | desaturate |
+| 7 | `cso:pain` | `pain` | Pain | pulse |
+| 8 | `cso:heaviness` | `heaviness` | Heaviness | gradient |
+| 9 | `cso:lightness` | `lightness` | Lightness | particle |
+| 10 | `cso:pulsing` | `pulsing` | Pulsing | pulse |
+| 11 | `cso:hollow` | `hollow` | Hollow | outline |
+| 12 | `cso:buzzing` | `buzzing` | Buzzing | particle |
+| 13 | `cso:nausea` | `nausea` | Nausea | wave |
+| 14 | `cso:ache` | `ache` | Ache | radial |
+| 15 | `cso:vibration` | `vibration` | Vibration | concentric |
 
-| System | URI | Core Function |
-|--------|-----|---------------|
-| SEEKING | `cso:SEEKING` | Dopaminergic motivation, exploration, anticipation |
-| FEAR | `cso:FEAR` | Threat detection, freezing, flight |
-| RAGE | `cso:RAGE` | Frustration, assertion, boundary violation response |
-| PANIC/GRIEF | `cso:PANIC_GRIEF` | Separation distress, attachment loss |
-| CARE | `cso:CARE` | Nurturing, oxytocin-mediated bonding |
-| PLAY | `cso:PLAY` | Social learning, joy, rough-and-tumble |
-| LUST | `cso:LUST` | Sexual motivation, reproductive drive |
+### Expansion Qualities (5, added v2.3)
 
-## Brain Regions (19)
+| # | CSO Term | Code | Display Name | Animation Family | Clinical Significance |
+|---|----------|------|--------------|-----------------|----------------------|
+| 16 | `cso:stillness` | `stillness` | Stillness | desaturate | Positive signal in T2 (arrival, not absence) and T15 (presence without action) |
+| 17 | `cso:expansion` | `expansion` | Expansion | radial | Positive regulation signal — spaciousness, distinct from heat (which has urgency) |
+| 18 | `cso:contraction` | `contraction` | Contraction | concentric | Withdrawal, bracing, protective narrowing — T4, T11 signature |
+| 19 | `cso:floating` | `floating` | Floating | particle | Groundlessness (T10) or dissociative lightness (T6) — distinct from lightness (which has buoyancy) |
+| 20 | `cso:trembling` | `trembling` | Trembling | particle | Somatic discharge — regulatory (post-activation) or distress (T6 freeze-thaw, T5 spillover) |
 
-Neuroanatomical regions referenced in territory profiles.
+---
 
-| Region | URI | Function |
-|--------|-----|----------|
-| Anterior Insula | `cso:anteriorInsula` | Interoceptive awareness hub |
-| Posterior Insula | `cso:posteriorInsula` | Primary interoceptive cortex |
-| Amygdala | `cso:amygdala` | Salience detection, threat processing |
-| Anterior Cingulate | `cso:anteriorCingulate` | Conflict monitoring, error detection |
-| Prefrontal Cortex | `cso:prefrontalCortex` | Executive function, regulation |
-| Orbitofrontal Cortex | `cso:orbitofrontalCortex` | Value computation, decision-making |
-| Hippocampus | `cso:hippocampus` | Contextual memory, spatial processing |
-| Hypothalamus | `cso:hypothalamus` | Autonomic regulation, body budgeting |
-| PAG | `cso:periaqueductalGray` | Pain modulation, defensive behavior |
-| Basal Ganglia | `cso:basalGanglia` | Habit formation, procedural learning |
-| Nucleus Accumbens | `cso:nucleusAccumbens` | Reward processing, SEEKING system |
-| Cerebellum | `cso:cerebellum` | Motor coordination, prediction timing |
-| Ventral Striatum | `cso:ventralStriatum` | Reward prediction, motivation |
-| Dorsal Striatum | `cso:dorsalStriatum` | Habit execution, procedural memory |
-| Thalamus | `cso:thalamus` | Sensory relay, consciousness gating |
-| Brain Stem | `cso:brainStem` | Autonomic regulation, arousal |
-| Somatosensory Cortex | `cso:somatosensoryCortex` | Body representation, touch processing |
-| Temporal Pole | `cso:temporalPole` | Social cognition, emotional memory |
-| Ventromedial PFC | `cso:ventromedialPFC` | Self-referential processing, default mode |
+## 3. Markov Blanket Framework
 
-## Brain Networks (8)
+Every data entity in the Cathexis architecture maps to one of four blanket components derived from Karl Friston's free energy principle. This is the internal organizing architecture — never surfaced to users by name.
 
-Distributed functional networks (Pessoa's entangled brain framework).
+| Component | CSO Term | What It Contains |
+|-----------|----------|-----------------|
+| **Internal State** | `cso:internalState` | Body sensations, zone activations, sensation qualities, intensity, affect system activation |
+| **External State** | `cso:externalState` | Context chips, ecological layers, relational map entries, life transitions, HealthKit biometrics |
+| **Sensory** | `cso:sensory` | Check-in observations, prediction outcomes, assessment responses — the boundary between world and self |
+| **Active** | `cso:active` | Intervention responses, real-world experiment outcomes, regulation practices — the user acting on the world |
 
-| Network | URI | Function |
-|---------|-----|----------|
-| Salience | `cso:salience` | Detecting and prioritizing relevant stimuli |
-| Default Mode | `cso:defaultMode` | Self-referential processing, internal narrative |
-| Executive | `cso:executive` | Cognitive control, working memory, planning |
-| Reward | `cso:reward` | Motivation, reinforcement, pleasure |
-| Fear/Threat | `cso:fearThreat` | Threat detection and defensive response |
-| Interoceptive | `cso:interoceptive` | Internal body state monitoring |
-| Social Cognition | `cso:socialCognition` | Mentalizing, theory of mind |
-| Motor | `cso:motor` | Action planning, movement execution |
+---
 
-## Ecological Layers (5)
+## 4. Primary Affect Systems (7)
 
-Bronfenbrenner's ecological model adapted for somatic context.
+Panksepp's subcortical circuits. These are not constructed emotions — they are genetically encoded functional systems present across all mammals.
 
-| Layer | URI | Scope |
-|-------|-----|-------|
-| Micro | `cso:micro` | Intimate relationships, household |
-| Meso | `cso:meso` | Work, school, community organizations |
-| Exo | `cso:exo` | Systems that affect but don't contain (healthcare, policy) |
-| Macro | `cso:macro` | Culture, economy, political climate |
-| Chrono | `cso:chrono` | Life transitions, temporal changes |
+| System | CSO Term | Function | Somatic Signature |
+|--------|----------|----------|-------------------|
+| **SEEKING** | `cso:seeking` | Dopaminergic motivation, exploration, curiosity | Forward-leaning activation, upper body energization |
+| **RAGE** | `cso:rage` | Frustration-anger response | Jaw tension, fist clenching, heat in upper body |
+| **FEAR** | `cso:fear` | Threat detection and avoidance | Chest tightness, shallow breathing, freeze or flight readiness |
+| **LUST** | `cso:lust` | Sexual and appetitive drive | Pelvic/lower body warmth, whole-body activation |
+| **CARE** | `cso:care` | Nurturing, attachment, bonding | Chest warmth, arm readiness, softening |
+| **PANIC/GRIEF** | `cso:panicGrief` | Separation distress, loss response | Chest ache, throat constriction, hollow feeling |
+| **PLAY** | `cso:play` | Social joy, boundary-testing, spontaneity | Lightness, whole-body buzzing, facial activation |
 
-## Blanket Components (4)
+PLAY suppression is a sensitive clinical marker — a life without play indicates chronic nervous system strain. PLAY reactivation is a marker of program success across territories.
 
-The Markov blanket framework organizing all entities.
+---
 
-| Component | URI | Contains |
-|-----------|-----|----------|
-| Internal State | `cso:internalState` | Body zones, sensation qualities, affect systems |
-| External State | `cso:externalState` | Ecological layers, world context |
-| Sensory State | `cso:sensoryState` | Interoceptive signals, check-in data |
-| Active State | `cso:activeState` | Interventions, regulation mechanisms |
+## 5. Brain Regions (19)
 
-## Data Structures
+Anatomical regions rendered in the Neural Net visualization as Bézier paths on SwiftUI Canvas. Activation is always distributed across co-participating regions — never single-region emotion attribution (Barrett + Pessoa design constraint).
 
-### SomaticDataPoint
+| # | Region | Functional Label | Blanket Component |
+|---|--------|-----------------|-------------------|
+| 1 | Prefrontal Cortex | Decision-Making & Planning | active |
+| 2 | Anterior Cingulate | Conflict Monitor | sensory |
+| 3 | Orbitofrontal Cortex | Value Assessment | active |
+| 4 | Insula (Anterior) | Body Awareness | sensory |
+| 5 | Insula (Posterior) | Raw Body Signal | internalState |
+| 6 | Amygdala | Salience Detection | sensory |
+| 7 | Hippocampus | Context & Memory | sensory |
+| 8 | Hypothalamus | Body Regulation | internalState |
+| 9 | Thalamus | Sensory Relay | sensory |
+| 10 | Basal Ganglia | Habit & Reward | active |
+| 11 | Periaqueductal Gray | Survival Response | internalState |
+| 12 | Brainstem | Autonomic Control | internalState |
+| 13 | Cerebellum | Prediction Timing | active |
+| 14 | Somatosensory Cortex | Touch & Body Position | sensory |
+| 15 | Motor Cortex | Action Preparation | active |
+| 16 | Temporal Cortex | Social & Auditory | externalState |
+| 17 | Parietal Cortex | Spatial & Integration | sensory |
+| 18 | Visual Cortex | Visual Processing | externalState |
+| 19 | Default Mode Network | Self-Reflection | internalState |
 
-A single observation from a check-in.
+---
 
-```json
-{
-  "@context": "https://cathexis.health/ontology/cso/v1.1/context.jsonld",
-  "@type": "SomaticDataPoint",
-  "zone": "cso:upperChest",
-  "quality": "cso:tightness",
-  "intensity": 0.7,
-  "timestamp": "2026-03-21T14:30:00Z"
-}
-```
+## 6. Functional Networks (8)
 
-### SomaticSnapshot
+Brain regions group into functional networks. These are the labels users see — never raw anatomical names.
 
-A complete check-in (multiple data points at one timestamp).
+| Network | Regions | What It Does |
+|---------|---------|-------------|
+| Threat Detection | Amygdala, PAG, Brainstem, ACC | Detects salience and generates survival responses |
+| Body Awareness | Anterior Insula, Posterior Insula, Somatosensory | Reads the body's current state |
+| Meaning-Making | PFC, OFC, Hippocampus, DMN | Constructs interpretations from body signals + context |
+| Regulation | PFC, ACC, Basal Ganglia, Cerebellum | Modulates activation, selects responses |
+| Memory | Hippocampus, Temporal, DMN | Contextualizes current experience with past |
+| Action | Motor Cortex, Basal Ganglia, Cerebellum, PFC | Prepares and executes responses |
+| Social | Temporal, OFC, Anterior Insula, DMN | Reads and models other people |
+| Homeostatic | Hypothalamus, Brainstem, PAG, Posterior Insula | Maintains body regulation |
 
-```json
-{
-  "@type": "SomaticSnapshot",
-  "timestamp": "2026-03-21T14:30:00Z",
-  "dataPoints": [
-    { "zone": "cso:upperChest", "quality": "cso:tightness", "intensity": 0.7 },
-    { "zone": "cso:solarPlexus", "quality": "cso:churning", "intensity": 0.5 },
-    { "zone": "cso:jawMouth", "quality": "cso:pressure", "intensity": 0.6 }
-  ],
-  "context": ["work_stress", "sleep_poor"],
-  "territory": "cso:threat"
-}
-```
+---
 
-### SomaticTrajectory
+## 7. Ecological Context Layers (5)
 
-A time series of snapshots showing change over days/weeks.
+Based on Bronfenbrenner's ecological systems theory, adapted for somatic context tracking. Each layer corresponds to a set of context chips that the user tags during daily check-ins.
 
-```json
-{
-  "@type": "SomaticTrajectory",
-  "userId": "anonymized-hash",
-  "territory": "cso:threat",
-  "snapshots": ["...array of SomaticSnapshot..."],
-  "trajectory": "improving",
-  "confidenceScore": 0.82
-}
-```
+| Layer | CSO Term | Scope | Context Chips |
+|-------|----------|-------|---------------|
+| **Microsystem** | `cso:microsystem` | Intimate relationships | Partner, Family, Close Friend |
+| **Mesosystem** | `cso:mesosystem` | Daily environments | Work/School, Commute, Social Event, Home Environment |
+| **Exosystem** | `cso:exosystem` | Indirect systems | Healthcare, Financial, Legal, Workplace Policies |
+| **Macrosystem** | `cso:macrosystem` | Cultural/societal | News/Media, Political Climate, Cultural Pressure |
+| **Chronosystem** | `cso:chronosystem` | Time/transitions | Life transitions (13 types tracked: new relationship, job change, relocation, health change, loss, pregnancy, graduation, retirement, divorce, new child, financial change, legal situation, other) |
 
-## Cross-Mappings
+---
 
-| CSO Entity | ICD-11 | SNOMED CT | FHIR Resource |
-|------------|--------|-----------|---------------|
-| SomaticDataPoint | — | 106147001 (Sensation quality) | Observation |
-| Territory | F40-F48 (varies) | 404684003 (Clinical finding) | Condition |
-| Intervention | — | 362961001 (Procedure) | Procedure |
-| Program | — | 243120004 (Regimen/therapy) | CarePlan |
+## 8. Territories (16)
 
-## Version History
+The Human Experience Framework organizes psychological experience into 16 territories. Each territory describes a pattern of nervous system organization — not a diagnosis.
 
-| Version | Date | Changes |
-|---------|------|---------|
-| v1.0 | Feb 2026 | Initial: 24 zones, 15 qualities, 16 territories |
-| v1.1 | Mar 2026 | Added: 5 zones (26-29 + whole body), 5 qualities (16-20), brain regions (19), brain networks (8), ecological layers (5), blanket configurations. URI scheme formalized. OWL/JSON-LD published. |
+| # | Territory | Code | Primary Affect Signature | Blanket Pattern |
+|---|-----------|------|--------------------------|-----------------|
+| T1 | Living in Threat | `threat` | FEAR↑ SEEKING↓ PLAY↓ | Too thin (porosity) |
+| T2 | Living in Shutdown | `shutdown` | SEEKING↓↓ PLAY↓ | Too thick (rigidity) |
+| T3 | Living in Loss | `loss` | PANIC/GRIEF↑ SEEKING variable | Torn (damage) |
+| T4 | Living in Disconnection | `disconnection` | PANIC/GRIEF suppressed, CARE↓ | Too thick (rigidity) |
+| T5 | Living in Overwhelm | `overwhelm` | All systems competing | Too thin (porosity) |
+| T6 | Living Under Siege | `siege` | FEAR locked, all potentially dysregulated | Torn (damage) |
+| T7 | Living in Conflict | `conflict` | SEEKING vs FEAR, or RAGE vs FEAR | Misshapen (boundary) |
+| T8 | Living in the Body Under Strain | `body` | Variable by presentation | Existential/neurological |
+| T9 | Living in a System Under Pressure | `systemPressure` | System-appropriate (not pathological) | Too thin (porosity) |
+| T10 | Living in Transition | `transition` | SEEKING disrupted, PANIC/GRIEF active | Misshapen (boundary) |
+| T11 | Living in Shame | `shame` | PANIC/GRIEF + self-model damage | Torn (damage) |
+| T12 | Living in Addiction and Compulsion | `addiction` | SEEKING hijacked | Misshapen (boundary) |
+| T13 | Living Behind a Mask | `mask` | SEEKING intact but misdirected, PLAY↓ | Too thick (rigidity) |
+| T14 | Living With an Altered Body/Mind | `alteredBodyMind` | Context-dependent | Environment-person mismatch |
+| T15 | Living in Existential Confrontation | `existential` | Variable — high engagement, accurate perception | Model limit |
+| T16 | Living With a Changing Brain | `changingBrain` | Variable — cognitive capacity shifts | Progressive change |
+
+**Currently shipping programs (2.3.0):** T1, T2, T3, T5, T6, T8 (6 territories). T7, T9–T15 shipping throughout 2026. T16 deferred to v4.0.
+
+---
+
+## 9. Theoretical Foundations
+
+Seven research programs, not wellness branding.
+
+| Theorist | Framework | Role in Cathexis |
+|----------|-----------|-----------------|
+| Lisa Feldman Barrett | Constructed Emotion Theory | Emotions are brain constructions from interoceptive data + context, not discovered essences |
+| Karl Friston | Predictive Processing / Active Inference | The brain minimizes prediction error through perception (updating beliefs) and action (changing the world) |
+| Jaak Panksepp | Primary Affect Systems | Seven subcortical emotional circuits (SEEKING, RAGE, FEAR, LUST, CARE, PANIC/GRIEF, PLAY) |
+| Antonio Damasio | Somatic Markers | Body states guide decision-making; feelings are the conscious reading of body predictions |
+| Mark Solms | Neuropsychoanalysis | Consciousness is affective at its core; the feeling of being alive arises from brainstem homeostatic processes |
+| Luiz Pessoa | Entangled Brain | No single brain region is "for" any emotion; function emerges from network co-participation |
+| Eric Kandel | Memory Systems & Reconsolidation | Memories become labile when reactivated; prediction error during reconsolidation enables updating (with Nader, Schiller, Ecker) |
+
+Essential addition: **Bud Craig** — interoception framework. The pathway from body signal to conscious feeling.
+
+---
+
+*CSO v1.1 — March 2026*
+
+*© 2026 Cathexis Health. CC BY-NC-SA 4.0.*

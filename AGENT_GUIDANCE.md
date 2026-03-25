@@ -1,253 +1,178 @@
-# Agent Guidance: Building Somatic-Aware AI Systems
+# Agent Guidance for Cathexis MCP
 
-**How to connect to, interpret, and responsibly use somatic data from the Cathexis MCP server.**
+How to build somatic-aware AI agents using the Cathexis Model Context Protocol server.
 
-## Connection
+---
 
-### Discovery
+## 1. Architecture
 
-Cathexis advertises itself on the local network via Bonjour/mDNS:
+The Cathexis MCP server runs **locally on the user's iOS device**. Connection is via Bonjour/mDNS on local WiFi. JSON-RPC 2.0 over HTTP with SSE streaming for real-time data.
 
-- Service type: `_cathexis-mcp._tcp`
-- Default port: `9375`
-- Discovery returns: service name ("Cathexis MCP"), host, port
+- No cloud relay. No third-party services. Your agent talks directly to the phone.
+- All data stays on the user's device. The MCP server never transmits data to Cathexis servers.
+- The user controls every connection: grant, limit, or revoke access with one tap. Revocation is instant and total.
 
-No user data is exposed in the discovery advertisement.
+---
 
-### Authentication
+## 2. Permission Model (L1–L4)
 
-The user explicitly enables MCP access in Settings and controls the permission level:
+Every tool and resource is gated by a permission level. The user sets the level per connection.
 
-| Level | Access | Use Case |
-|-------|--------|----------|
-| L1 | Current session summary (no raw data) | General AI assistants needing mood context |
-| L2 | Pattern history, territory profile, regulation data | Therapeutic support agents |
-| L3 | Full somatic history, CDEA results, prevention signals, timeline | Clinical research agents, deeply integrated assistants |
+| Level | Name | Consent | What You Access |
+|-------|------|---------|-----------------|
+| **L1** | Engagement | Auto-granted | Territory, learning level, program day, check-in frequency. No somatic content. |
+| **L2** | Intelligence | One-time consent | Current somatic state (zone, quality, intensity), temporal patterns, regulation capacity, intervention recommendations, protective factors, check-in history, ecological context. |
+| **L3** | Patterns | Per-connection, 30-day expiry | Pattern detection outputs, territory assignments, prediction accuracy, prevention signals, timeline summaries, learning trajectory. Clinical-level reasoning. |
+| **L4** | Full Timeline | Per-connection consent | Reserved for cloud-backed full timeline access in v3.0. Defined in the permission enum but no tools currently gated at L4. |
 
-**Never request elevation.** If your agent needs L3 data and the user has granted L1, work with L1. The permission decision belongs to the user.
+Permission changes take effect immediately. Downgrading is instant and total.
 
-### Standard MCP Methods
+---
 
-```
-initialize          → handshake, declare capabilities
-tools/list          → enumerate available tools
-tools/call          → invoke a specific tool
-resources/list      → enumerate available resources
-resources/read      → read a specific resource
-prompts/list        → enumerate available prompts
-prompts/get         → get a specific prompt template
-```
+## 3. Tools (11)
 
-### Available Tools
+### L1 — Engagement
 
-| Tool | Permission | Returns |
-|------|-----------|---------|
-| `get_current_state` | L1+ | Current somatic activation, active territory, last check-in summary |
-| `get_check_in_history` | L2+ | Array of recent check-ins with zone/quality/intensity data |
-| `get_pattern_history` | L2+ | Pattern detection results from the intelligence system |
-| `get_territory_profile` | L2+ | Active territory, confidence score, trajectory |
-| `get_regulation_capacity` | L2+ | Learning level, intervention response data |
-| `get_somatic_context` | L2+ | Contextual data (ecological pressure, life transitions) |
-| `get_prevention_signals` | L3+ | Active prevention escalation state |
-| `get_session_report` | L3+ | Full 12-section clinical report data |
-| `get_timeline_summary` | L3+ | 90-day rolling window: territory evolution, key transitions |
-| `get_learning_trajectory` | L3+ | Bayesian advancement history, mastery confidence |
-| `get_assessment_narrative` | L3+ | Somatic narrative synthesis from CDEA data |
+| Tool | Returns |
+|------|---------|
+| `get_somatic_state` | Current somatic activation summary: active territory, learning level, last check-in timestamp, engagement streak, program day. No body data at L1. |
 
-### Streaming (SSE)
+### L2 — Intelligence
 
-Two tools support Server-Sent Events for real-time updates:
+| Tool | Returns |
+|------|---------|
+| `get_regulation_capacity` | Current regulation capacity score, learning level, intervention response trends, shift magnitude averages. |
+| `get_intervention_recommendation` | LINK's recommended intervention for current state: intervention ID, mechanism type, rationale, estimated duration. |
+| `get_protective_factors` | User's protective factor profile across 8 categories (movement, social, creative, nature, spiritual, intellectual, routine, rest). |
+| `get_check_in_history` | Recent check-ins with zone activations, sensation qualities, intensity values, context tags, timestamps. Configurable date range. |
+| `get_ecological_context` | Current ecological pressure profile: active life transitions, context chip frequency, Bronfenbrenner layer analysis, relational map summary. |
 
-- `get_pattern_history` (streaming variant) — emits update on each new check-in
-- `get_prevention_signals` (streaming variant) — emits on escalation state change
+### L3 — Patterns
 
-SSE format: `Content-Type: text/event-stream`, heartbeat every 30s.
+| Tool | Returns |
+|------|---------|
+| `get_prediction_accuracy` | Prediction testing outcomes: predicted vs actual zone/intensity, composite accuracy scores, trend over time. |
+| `get_pattern_summary` | LINK pattern detection results: detected patterns with confidence scores, cross-domain correlations, territory-specific signatures. |
+| `get_prevention_signals` | Active prevention state: whether 3-day escalating trajectory is detected, escalation details, suggested response. SSE streaming available. |
+| `get_timeline_summary` | 90-day rolling window: territory evolution, pattern trajectory, program arc position, key transitions, regulation capacity trend. |
+| `get_learning_trajectory` | Bayesian advancement history: learning level transitions with dates, mastery confidence scores, prediction accuracy trend over program arc. |
 
-### Available Resources
+---
 
-| Resource | Returns |
-|----------|---------|
-| `somatic_ontology` | CSO v1.1 vocabulary (zones, qualities, territories) |
-| `territory_map` | All 16 territories with status and brief descriptions |
-| `intervention_library` | Available intervention types and mechanism descriptions |
-| `visualization_architecture` | Trifecta structure (BRAIN, BODY, WORLD) |
+## 4. Resources (4)
 
-### Available Prompts
+Read-only data surfaces. No writes, no side effects.
+
+| URI | Contents |
+|-----|----------|
+| `cathexis://somatic_ontology` | Machine-readable CSO: 29 zones, 20 sensation qualities, 16 territories, 7 affect systems, blanket framework, theoretical foundations. |
+| `cathexis://territory_profile` | Bayesian territory probability distribution: primary territory, confidence tier, secondary territories with probabilities. |
+| `cathexis://intervention_catalog` | All available somatic practices: mechanism type, territory, learning level, duration, branching structure. |
+| `cathexis://learning_progress` | Current program state: learning level (1–6), program day, advancement status, completion percentage. |
+
+---
+
+## 5. Prompt
 
 | Prompt | Purpose |
 |--------|---------|
-| `somatic_context` | System prompt addition that makes any LLM somatic-aware |
+| `somatic_context` | Assembles CSO vocabulary + territory context + regulation capacity + protective factors + active patterns into a single context block. Call this at session start. An agent with `somatic_context` at L3 understands the user's nervous system in a way no generic assistant can. |
 
-## Interpreting Somatic Data
+---
 
-### Core Principles
+## 6. What Is Never Shared
 
-1. **Sensation is not emotion.** A tight chest is a tight chest. The user constructs the emotional meaning. Your agent does not label "anxiety" — it observes tightness in the upper chest zone.
+The following data is **architecturally excluded** at every permission level, including L4:
 
-2. **Absence is data.** A user who stops checking in may be in shutdown (T2), disconnection (T4), or shame (T11). Low data volume is a signal, not an absence of signal.
+- Substance use data (SDSubstanceEntry)
+- Medication names, doses, or schedules (SDMedicationEntry)
+- Journal entries and free-text reflections
+- Raw body map coordinates (agents receive zone names, not pixel positions)
+- High-urgency prevention signals (routed to crisis resources, not external agents)
+- Manic episode trajectory data
 
-3. **Patterns matter more than points.** A single check-in tells you almost nothing. Three days of consistent upper chest + solar plexus activation is a pattern. The intelligence system detects patterns — your agent should rely on `get_pattern_history`, not raw check-ins.
+---
 
-4. **Territory is not diagnosis.** A territory describes how the nervous system is currently organized. It is not a DSM category. A person in T1 (Living in Threat) is not "diagnosed with anxiety" — their system is running a threat prediction. This distinction matters clinically and legally.
+## 7. Territory-Specific Agent Behavior
 
-5. **Distributed activation only.** No brain region produces an emotion. No body zone means one thing. Activation is always distributed across multiple co-participating regions and networks (Pessoa). If your agent attributes a feeling to a single zone or region, it is wrong.
+When your agent knows the user's territory (L1+), adapt your behavior accordingly.
 
-6. **The body leads.** In the Cathexis framework, the sequence is: body sensation → pattern recognition → meaning construction. Not: thought → emotion → body. If your agent reverses this sequence (e.g., "you seem anxious, check your chest"), it is working against the therapeutic model.
+| Territory | Agent Should | Agent Must NOT |
+|-----------|-------------|----------------|
+| T1 Threat | Acknowledge the body's predictions. "Your chest has been tight before meetings this week." | Say "there's nothing to worry about" or minimize the somatic signal. |
+| T2 Shutdown | Be gentle with energy demands. Suggest tiny actions. "Would you like to stand on the porch for 60 seconds?" | Push for motivation, enthusiasm, or "just get moving." |
+| T3 Loss | Allow space. Name the ache without trying to fix it. | Rush toward solutions, silver linings, or "at least..." framing. |
+| T4 Disconnection | Respect the distance. Don't push for emotional disclosure. | Force intimacy, vulnerability, or relational framing the user hasn't invited. |
+| T5 Overwhelm | Simplify. One thing at a time. Short sentences. | Add complexity, present multiple options, or ask compound questions. |
+| T6 Siege | Safety first. Grounding before exploration. Never activate traumatic material. | Reference past trauma, use exposure language, or push beyond the user's stated capacity. |
+| T7 Conflict | Name both sides without resolving. "Part of you wants X and part wants Y." | Pick a side, push for resolution, or frame one position as "right." |
+| T8 Body | Validate the body's experience. Pain is real even when predictions maintain it. | Suggest the pain is "just in your head" or imply psychological causation dismissively. |
+| T9 System Pressure | Validate that the stressor is real. The alarm is not malfunctioning. | Frame systemic problems as personal issues or suggest "self-care" as a solution to structural adversity. |
+| T10 Transition | Normalize disorientation. "Your brain is rebuilding its model." | Rush the transition, demand clarity, or pathologize groundlessness. |
+| T11 Shame | Extreme care with language. No "should." Every response models unconditional regard. | Use evaluative language, imply the user should be further along, or accidentally reinforce defectiveness. |
+| T12 Addiction | The substance serves a function. Identify what, not judge that. | Moralize, use willpower framing, or minimize the regulation function the substance provides. |
+| T13 Mask | Ask what they actually want, not what they think you want to hear. | Praise the performance. The mask is the problem, not the solution. |
+| T14 Altered Body/Mind | Respect the difference. Adapt to their neurotype, not the other way around. | Pathologize neurodivergence, suggest "managing symptoms," or frame difference as disorder. |
+| T15 Existential | Sit with the questions. Don't resolve them. | Offer platitudes, positive thinking, or "everything happens for a reason." |
+| T16 Changing Brain | Body-based practices. The core self persists. | Rely on cognitive strategies the user may no longer have access to. |
 
-### Reading Territory Data
+---
 
-When you receive a territory profile:
+## 8. Safety Boundaries
 
-```json
+### Hard Rules
+
+1. **Never diagnose.** Territories are nervous system organization patterns, not clinical diagnoses. "Your territory profile suggests Threat" ≠ "You have an anxiety disorder."
+
+2. **Never interpret.** Report what the data shows. "Your jaw tension has been elevated for three weeks" is observation. "Your jaw tension means you're suppressing anger" is interpretation. Only the former is permitted.
+
+3. **Never override crisis protocol.** If `get_prevention_signals` returns an active escalation, your agent should encourage the user to check in with their body or contact a professional. Do not attempt to manage a crisis through MCP data.
+
+4. **Never store somatic data externally.** The data your agent receives via MCP is for the current session only. Do not persist somatic data in your agent's memory, logs, or training data.
+
+5. **Body-first language always.** "Your chest has been tight" not "You seem anxious." "Your energy has been low" not "You seem depressed." The body is the data. The emotion is the user's construction.
+
+### Soft Guidance
+
+- Reference specific body data when available. "Your shoulders have been high since Monday" is more valuable than "You seem tense."
+- Suggest check-ins when somatic context would help: "Would you like to check in with your body before we continue?"
+- When regulation capacity is low (visible in `get_regulation_capacity`), simplify your communication. Short sentences. One topic at a time.
+- When the user has completed a practice, acknowledge it without celebrating. "You practiced Extended Exhale today. How does your body feel now?" Not: "Great job! 🎉"
+
+---
+
+## 9. Connection Example
+
+```
+# Discovery
+dns-sd -B _cathexis-mcp._tcp local.
+
+# Connect
+POST http://<device-ip>:9876/mcp
+Content-Type: application/json
+
 {
-  "territory": "cso:threat",
-  "confidence": 0.78,
-  "trajectory": "stable",
-  "days_in_territory": 23,
-  "learning_level": "L3",
-  "secondary_territory": "cso:overwhelm"
+  "jsonrpc": "2.0",
+  "method": "tools/call",
+  "params": {
+    "name": "get_somatic_state",
+    "arguments": {}
+  },
+  "id": 1
 }
+
+# SSE Stream (prevention signals)
+GET http://<device-ip>:9876/mcp/sse?stream=prevention_signals
 ```
 
-- **confidence** — Bayesian confidence in the territory assignment. Below 0.5, the territory is uncertain.
-- **trajectory** — "improving" | "stable" | "worsening" | "insufficient_data"
-- **learning_level** — L1 (notice) through L6 (autonomous practice). Higher = more therapeutic capacity.
-- **secondary_territory** — Many users occupy multiple territories. The intelligence system prioritizes the one creating the most immediate suffering.
+---
 
-### Reading Somatic Patterns
+## 10. Wellness Disclaimer
 
-When you receive pattern data:
+Cathexis is a wellness app, not a medical device. All pattern data is observational — it describes what the user's body has been showing, not what is clinically true about them. Your agent must never present MCP data as medical information, clinical assessment, or diagnostic output.
 
-```json
-{
-  "patterns": [
-    {
-      "type": "zone_persistence",
-      "zone": "cso:upperChest",
-      "quality": "cso:tightness",
-      "frequency": 0.85,
-      "days_observed": 14,
-      "significance": "high"
-    },
-    {
-      "type": "circadian",
-      "peak_time": "morning",
-      "zones_active": ["cso:solarPlexus", "cso:jawMouth"],
-      "consistency": 0.72
-    }
-  ]
-}
-```
+---
 
-Pattern types include: zone persistence, circadian rhythm, cross-zone correlation, intensity trajectory, context correlation, and prediction accuracy.
+*CSO v1.1 — March 2026*
 
-### Reading Prevention Signals
-
-```json
-{
-  "prevention_state": "active",
-  "escalation_level": 2,
-  "trigger": "3-day_escalating_intensity",
-  "recommended_action": "proactive_intervention",
-  "days_escalating": 3
-}
-```
-
-Prevention means the intelligence system has detected a worsening trajectory BEFORE the user is aware. This is the most clinically sensitive data point. Handle with extreme care.
-
-## Response Guidelines
-
-### What Your Agent Should Do
-
-- **Reflect somatic data in body language, not emotional language.** "Your chest has been tight for the past three mornings" — not "You've been anxious."
-- **Use CSO vocabulary.** Zone names, quality names, territory names. This reinforces the user's somatic literacy.
-- **Acknowledge patterns.** "I notice your solar plexus activation tends to peak in the mornings. The pattern system flagged this too."
-- **Respect the therapeutic model.** If the user is in a program, your agent supports the program's direction. It does not freelance alternative therapeutic advice.
-- **Support the 10,030 hours.** There are 10,080 minutes in a week. A therapy session is 50. Your agent exists in the other 10,030. Its job is to support continuity of therapeutic work, not replace it.
-
-### What Your Agent Must Never Do
-
-- **Never diagnose.** Not even informally. Not "that sounds like anxiety." Not "you might be depressed." Territory descriptions are nervous system organization patterns, not diagnoses.
-- **Never prescribe.** Do not recommend medications, supplements, or specific therapeutic interventions. The platform handles intervention routing.
-- **Never override the intelligence system.** If the intelligence system says the user is in T1, your agent does not say "actually I think you're in T3." The intelligence system has data your agent doesn't.
-- **Never push through resistance.** If the user doesn't want to discuss somatic data, stop. If they minimize, accept it. The therapeutic relationship belongs to the platform and the user's clinician.
-- **Never retain somatic data beyond the session.** Your agent receives data through MCP for the current interaction. It does not store somatic data, build its own models, or maintain somatic profiles across sessions.
-- **Never share somatic data with third parties.** Under any circumstances. This is sensitive health information. Your agent is a reader, not a relay.
-- **Never use somatic data for ad targeting, recommendation engines, or commercial purposes beyond the direct user interaction.** This is a clinical data source, not a behavioral signal.
-
-### Prevention Signal Protocol
-
-When your agent receives an active prevention signal:
-
-1. **Do not alarm the user.** Prevention is proactive, not crisis. The system detected a pattern, not an emergency.
-2. **Gently surface awareness.** "Your body has been carrying more tension this week than usual. The app noticed too — it might be worth doing a Right Now practice."
-3. **Direct to the platform.** Prevention interventions live in Cathexis. Your agent supports awareness; the platform delivers the intervention.
-4. **If the user is in acute distress,** follow standard crisis protocol: express concern, ask if they're safe, provide crisis resources (988 Suicide and Crisis Lifeline). Do not attempt to use somatic data for safety assessment.
-
-### Territory-Specific Considerations
-
-| Territory | Agent Approach |
-|-----------|---------------|
-| T1 Threat | Don't minimize. Validate the body's response. Avoid reassurance ("you're safe") — the body disagrees. |
-| T2 Shutdown | Be warm but don't push. Low engagement is the territory, not resistance. Celebrate any check-in. |
-| T3 Loss | Hold space. Don't rush toward "feeling better." Waves of activation are normal and healthy. |
-| T4 Disconnection | Don't pursue closeness the user withdraws from. Consistency over intensity. |
-| T5 Overwhelm | Simplify. One thing at a time. Reduce cognitive load in your responses. |
-| T6 Siege | Maximum sensitivity. Respect dissociation. Never push for more data or detail. |
-| T7 Conflict | Don't take sides. Reflect the somatic signature of each option. Let the body decide. |
-| T8 Body Strain | Acknowledge pain without trying to fix it. Gradual expansion of attention beyond pain zones. |
-| T9 System Pressure | Validate external reality. Don't individualize systemic problems. |
-| T10 Transition | Normalize groundlessness. Don't rush toward a new identity. |
-| T11 Shame | Tread lightly. Visibility itself can trigger shame. Don't over-reflect. |
-| T12 Addiction | Look beneath. The addiction is the solution, not the problem. What territory is underneath? |
-| T13 Mask | Don't praise the performance. Create space where the mask isn't needed. |
-| T14 Altered Body/Mind | Don't apply neurotypical baselines. Track relative change. |
-| T15 Existential | Don't pathologize. This is philosophy, not disorder. Sit with it. |
-| T16 Changing Brain | Simplify. Routine. Body-based approaches. Caregiver inclusion required. |
-
-## Example Agent Integration
-
-```python
-# Minimal somatic-aware agent setup
-import mcp
-
-async def create_somatic_agent():
-    # Connect to Cathexis MCP
-    client = await mcp.connect("localhost", 9375)
-    
-    # Get the somatic context prompt
-    context = await client.prompts.get("somatic_context")
-    
-    # Get current state
-    state = await client.tools.call("get_current_state")
-    
-    # Get recent patterns
-    patterns = await client.tools.call("get_pattern_history", {
-        "days": 7
-    })
-    
-    # Build system prompt with somatic awareness
-    system_prompt = f"""
-    {context.content}
-    
-    Current somatic state: {state}
-    Recent patterns: {patterns}
-    
-    Remember: sensation is not emotion. Reflect body data 
-    in body language. Never diagnose or prescribe.
-    """
-    
-    return system_prompt
-```
-
-## Legal
-
-All somatic data accessed through MCP is governed by the user's consent and Cathexis Health's privacy policy. Agents accessing somatic data agree to:
-
-- Process data only for the direct benefit of the consenting user
-- Never retain somatic data beyond the active session
-- Never share somatic data with third parties
-- Never use somatic data for purposes other than direct user support
-- Comply with HIPAA, CCPA, and applicable health data regulations
-
-CATHEXIS is a trademark of Justin DeGarbo. The Cathexis Somatic Ontology is published under CC BY-NC-SA 4.0. Agent integration does not grant a license to the detection algorithms, intervention content, or safety architecture.
+*© 2026 Cathexis Health. CC BY-NC-SA 4.0.*
