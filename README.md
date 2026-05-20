@@ -25,7 +25,7 @@ The MCP server runs locally on the user's iOS device. Your AI agent connects via
 2. Open Profile → AI Integration → Enable MCP Server
 3. Your MCP client discovers the server via Bonjour on local WiFi
 4. The user approves the connection and sets permission level (L1–L4)
-5. Query somatic data using the 11 published tools
+5. Query somatic data using the 17 published tools
 
 Claude Desktop connects natively. Any MCP-compatible client works.
 
@@ -58,8 +58,8 @@ Machine-readable formats: OWL, Turtle, JSON-LD — all available at the Zenodo D
 ## Version
 
 - **CSO:** v1.1 (March 2026)
-- **MCP Server:** 11 tools, 4 resources, 1 prompt, SSE streaming
-- **App:** Cathexis 2.3.0+ on the App Store
+- **MCP Server:** 17 tools, 12 resources, 4 prompts
+- **App:** Cathexis 2.3.5+ on the App Store
 
 ## Links
 
