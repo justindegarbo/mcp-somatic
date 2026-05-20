@@ -188,7 +188,7 @@ Each profile describes how a nervous system is organized — not a diagnosis. Mo
   "somatic_markers": ["solarPlexus", "upperChest", "jaw", "shoulders", "stomach"],
   "sensation_qualities": ["tightness", "pressure", "heat", "ache", "contraction"],
   "clinical_risk": "moderate",
-  "status": "planned"
+  "status": "shipping"
 }
 ```
 
@@ -234,7 +234,7 @@ Each profile describes how a nervous system is organized — not a diagnosis. Mo
   "somatic_markers": ["shoulders", "jaw", "upperBack", "lowerBack", "headScalp"],
   "sensation_qualities": ["tightness", "heaviness", "ache", "pressure", "heat"],
   "clinical_risk": "low",
-  "status": "planned",
+  "status": "shipping",
   "clinical_note": "NEVER frame regulation as 'calming down.' Frame as 'building resources for staying present in a hard situation.'"
 }
 ```
@@ -258,7 +258,7 @@ Each profile describes how a nervous system is organized — not a diagnosis. Mo
   "somatic_markers": ["stomach", "upperChest", "feet", "wholeBody"],
   "sensation_qualities": ["floating", "hollow", "heaviness", "buzzing", "nausea"],
   "clinical_risk": "moderate",
-  "status": "planned",
+  "status": "shipping",
   "clinical_note": "Distinct from T3: T3 = specific object lost. T10 = entire predictive model obsolete."
 }
 ```
@@ -409,6 +409,6 @@ Each profile describes how a nervous system is organized — not a diagnosis. Mo
 
 ---
 
-*CSO v1.1 — March 2026*
+*CSO v1.1 — Updated May 2026*
 
 *© 2026 Cathexis Health. CC BY-NC-SA 4.0.*
