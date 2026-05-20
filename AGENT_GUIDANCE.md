@@ -29,7 +29,7 @@ Permission changes take effect immediately. Downgrading is instant and total.
 
 ---
 
-## 3. Tools (11)
+## 3. Tools (17)
 
 ### L1 — Engagement
 
@@ -46,6 +46,9 @@ Permission changes take effect immediately. Downgrading is instant and total.
 | `get_protective_factors` | User's protective factor profile across 8 categories (movement, social, creative, nature, spiritual, intellectual, routine, rest). |
 | `get_check_in_history` | Recent check-ins with zone activations, sensation qualities, intensity values, context tags, timestamps. Configurable date range. |
 | `get_ecological_context` | Current ecological pressure profile: active life transitions, context chip frequency, Bronfenbrenner layer analysis, relational map summary. |
+| `get_program_history` | Territory program trajectory: completed programs, order, duration, learning progression. |
+| `get_biometric_summary` | HealthKit biometric summary: HRV, sleep, heart rate, respiratory rate, activity trends correlated with somatic data. |
+| `get_engagement_trend` | Longitudinal practice engagement: frequency, completion rates, mechanism preferences, weekly breakdown. |
 
 ### L3 — Patterns
 
@@ -53,30 +56,44 @@ Permission changes take effect immediately. Downgrading is instant and total.
 |------|---------|
 | `get_prediction_accuracy` | Prediction testing outcomes: predicted vs actual zone/intensity, composite accuracy scores, trend over time. |
 | `get_pattern_summary` | Pattern detection results: detected patterns with confidence scores, cross-domain correlations, territory-specific signatures. |
-| `get_prevention_signals` | Active prevention state: whether 3-day escalating trajectory is detected, escalation details, suggested response. SSE streaming available. |
+| `get_prevention_signals` | Active prevention state: whether 3-day escalating trajectory is detected, escalation details, suggested response. |
 | `get_timeline_summary` | 90-day rolling window: territory evolution, pattern trajectory, program arc position, key transitions, regulation capacity trend. |
 | `get_learning_trajectory` | Bayesian advancement history: learning level transitions with dates, mastery confidence scores, prediction accuracy trend over program arc. |
+| `get_crisis_history` | Flooded state (2 AM crisis mode) episode history: timestamps, durations, outcomes. Safety-critical. |
+| `get_safety_events` | Sessions where safety gates fired: tier, mechanism, temporal pattern. Safety-critical. |
+| `get_domain_confidences` | Assessment domain confidence scores: 10 domains with completion rates and coverage. |
 
 ---
 
-## 4. Resources (4)
+## 4. Resources (12)
 
 Read-only data surfaces. No writes, no side effects.
 
-| URI | Contents |
-|-----|----------|
-| `cathexis://somatic_ontology` | Machine-readable CSO: 29 zones, 20 sensation qualities, 16 territories, 7 affect systems, blanket framework, theoretical foundations. |
-| `cathexis://territory_profile` | Bayesian territory probability distribution: primary territory, confidence tier, secondary territories with probabilities. |
-| `cathexis://intervention_catalog` | All available somatic practices: mechanism type, territory, learning level, duration, branching structure. |
-| `cathexis://learning_progress` | Current program state: learning level (1–6), program day, advancement status, completion percentage. |
+| URI | Level | Contents |
+|-----|-------|----------|
+| `cathexis://somatic_ontology` | L1 | Machine-readable CSO: 29 zones, 20 sensation qualities, 16 territories, 7 affect systems, blanket framework, theoretical foundations. |
+| `cathexis://territory_profile` | L1 | Bayesian territory probability distribution: primary territory, confidence tier, secondary territories with probabilities. |
+| `cathexis://intervention_catalog` | L1 | All available somatic practices: mechanism type, territory, learning level, duration, branching structure. |
+| `cathexis://ontology/zones` | L1 | Anatomical zone vocabulary (29 zones) from the Cathexis Somatic Ontology. |
+| `cathexis://ontology/qualities` | L1 | Sensation quality vocabulary (20 qualities) from the CSO. |
+| `cathexis://ontology/territories` | L1 | HEF territory definitions (16 territories) with affect signatures and blanket patterns. |
+| `cathexis://ontology/affect_systems` | L1 | Panksepp's 7 primary affect systems with somatic signatures. |
+| `cathexis://ontology/brain_regions` | L1 | 19 brain regions with functional labels and blanket component mappings. |
+| `cathexis://ontology/networks` | L1 | 11 functional brain networks with region membership and descriptions. |
+| `cathexis://server_info` | L1 | Server capabilities, version, and connection metadata. |
+| `cathexis://learning_progress` | L2 | Current program state: learning level (1–6), program day, advancement status, completion percentage. |
+| `cathexis://session_report` | L3 | Structured clinical session report: program status, body map summary, patterns, progress arc. |
 
 ---
 
-## 5. Prompt
+## 5. Prompts (4)
 
 | Prompt | Purpose |
 |--------|---------|
 | `somatic_context` | Assembles CSO vocabulary + territory context + regulation capacity + protective factors + active patterns into a single context block. Call this at session start. An agent with `somatic_context` at L3 understands the user's nervous system in a way no generic assistant can. |
+| `session_prep` | Session preparation brief for therapists: program status, recent check-ins, practice engagement, safety events, crisis episodes, and active patterns assembled into a structured clinical summary. |
+| `risk_review` | Structured risk assessment: safety gate history, crisis episodes, prevention signals, engagement decline, and clinical exclusion notes. |
+| `progress_summary` | Therapeutic progress narrative: program trajectory, regulation capacity growth, mechanism effectiveness, and interoceptive accuracy trends. |
 
 ---
 
@@ -173,11 +190,6 @@ Cathexis is a wellness app, not a medical device. All pattern data is observatio
 
 ---
 
-*CSO v1.1 — March 2026*
-
-*© 2026 Cathexis Health. CC BY-NC-SA 4.0.*
-
-
-*CSO v1.1 — March 2026*
+*CSO v1.1 — Updated May 2026*
 
 *© 2026 Cathexis Health. CC BY-NC-SA 4.0.*
