@@ -145,20 +145,25 @@ Anatomical regions rendered in the Neural Net visualization as Bézier paths on 
 
 ---
 
-## 6. Functional Networks (8)
+## 6. Functional Networks (11)
 
 Brain regions group into functional networks. These are the labels users see — never raw anatomical names.
 
-| Network | Regions | What It Does |
-|---------|---------|-------------|
-| Threat Detection | Amygdala, PAG, Brainstem, ACC | Detects salience and generates survival responses |
-| Body Awareness | Anterior Insula, Posterior Insula, Somatosensory | Reads the body's current state |
-| Meaning-Making | PFC, OFC, Hippocampus, DMN | Constructs interpretations from body signals + context |
-| Regulation | PFC, ACC, Basal Ganglia, Cerebellum | Modulates activation, selects responses |
-| Memory | Hippocampus, Temporal, DMN | Contextualizes current experience with past |
-| Action | Motor Cortex, Basal Ganglia, Cerebellum, PFC | Prepares and executes responses |
-| Social | Temporal, OFC, Anterior Insula, DMN | Reads and models other people |
-| Homeostatic | Hypothalamus, Brainstem, PAG, Posterior Insula | Maintains body regulation |
+| Network | Primary Component | What It Does |
+|---------|------------------|-------------|
+| Self-Reflection | internalState | Generates the continuous sense of self. Active during mind-wandering, autobiographical memory, self-referential processing. |
+| Attention & Priority | sensory | Detects what matters right now. Switches between internal body signals and external events based on salience. |
+| Focus & Planning | sensory | Holds goals in working memory, plans sequences, inhibits irrelevant signals. |
+| Body Sensing | internalState | Reads the body's current state. Interoceptive awareness of heart rate, gut signals, breath, temperature. |
+| Threat Response | sensory | Detects threat and generates survival responses. Rapid, subcortical, often before conscious awareness. |
+| Motivation & Drive | activeState | Generates curiosity, wanting, approach behavior. The engine behind exploration and goal pursuit. |
+| Social Connection | sensory | Reads other people. Infers intentions, tracks social context, models relational dynamics. |
+| Learning & Memory | sensory | Consolidates new experiences into lasting patterns. Contextualizes current experience with past. |
+| Movement & Regulation | activeState | Coordinates movement, timing, and autonomic regulation. Body-based regulatory actions. |
+| Attachment & Loss | internalState | Processes separation distress and reunion signals. Monitors proximity to attachment figures. |
+| Play & Spontaneity | activeState | Generates social joy, boundary-testing, physical play. Suppression is a clinical marker of chronic strain. |
+
+Networks overlap — the same region participates in multiple networks with different roles. What you experience emerges from the pattern of activation across networks, not from any single one.
 
 ---
 
@@ -199,7 +204,7 @@ The Human Experience Framework organizes psychological experience into 16 territ
 | T15 | Living in Existential Confrontation | `existential` | Variable — high engagement, accurate perception | Model limit |
 | T16 | Living With a Changing Brain | `changingBrain` | Variable — cognitive capacity shifts | Progressive change |
 
-**Currently shipping programs (2.3.0):** T1, T2, T3, T5, T6, T8 (6 territories). T7, T9–T15 shipping throughout 2026. T16 deferred to v4.0.
+**Currently shipping programs (2.3.5):** T1, T2, T3, T5, T6, T7, T8, T9, T10 (9 territories). T4, T11–T15 shipping throughout 2026. T16 deferred to v4.0.
 
 ---
 
@@ -221,6 +226,6 @@ Essential addition: **Bud Craig** — interoception framework. The pathway from 
 
 ---
 
-*CSO v1.1 — March 2026*
+*CSO v1.1 — Updated May 2026*
 
 *© 2026 Cathexis Health. CC BY-NC-SA 4.0.*
