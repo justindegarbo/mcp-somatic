@@ -176,3 +176,8 @@ Cathexis is a wellness app, not a medical device. All pattern data is observatio
 *CSO v1.1 — March 2026*
 
 *© 2026 Cathexis Health. CC BY-NC-SA 4.0.*
+
+
+*CSO v1.1 — March 2026*
+
+*© 2026 Cathexis Health. CC BY-NC-SA 4.0.*
