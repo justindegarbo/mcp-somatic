@@ -31,11 +31,11 @@ Claude Desktop connects natively. Any MCP-compatible client works.
 
 ## Namespace
 
-**CSO Namespace URI:** `https://cathexis.health/ontology/cso/`
+**CSO Namespace URI:** `https://cathexis.health/ontology/cso/v1.1/`
 
 **BioPortal:** [CXSO on BioPortal](https://bioportal.bioontology.org/ontologies/CXSO)
 
-**Zenodo DOI:** [10.5281/zenodo.19157529](https://doi.org/10.5281/zenodo.19157529) (White Paper v2, CC BY-NC-SA 4.0)
+**Zenodo DOI:** [10.5281/zenodo.20448395](https://doi.org/10.5281/zenodo.20448395) (White Paper v2.1 + machine ontology, CC BY-NC-SA 4.0)
 
 Machine-readable formats: OWL, Turtle, JSON-LD — all available at the Zenodo DOI.
 
@@ -43,7 +43,7 @@ Machine-readable formats: OWL, Turtle, JSON-LD — all available at the Zenodo D
 
 | Document | Location |
 |----------|----------|
-| Somatic Ontology White Paper v2 | [Zenodo DOI: 10.5281/zenodo.19157529](https://doi.org/10.5281/zenodo.19157529) |
+| Somatic Ontology White Paper v2.1 | [Zenodo DOI: 10.5281/zenodo.20448395](https://doi.org/10.5281/zenodo.20448395) |
 | HEF Clinical Manual | [Zenodo DOI: 10.5281/zenodo.19157697](https://doi.org/10.5281/zenodo.19157697) |
 | CSO on BioPortal | [CXSO](https://bioportal.bioontology.org/ontologies/CXSO) |
 | HEF Community Guide | [cathexis.health/hef](https://cathexis.health/hef) |
