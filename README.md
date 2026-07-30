@@ -75,4 +75,4 @@ Machine-readable formats: OWL, Turtle, JSON-LD — all available at the Zenodo D
 
 *Sensation before emotion. Curiosity over judgment. Adaptation over pathology.*
 
-*© 2026 Justin DeGarbo / Cathexis Health. Vocabulary licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*
+*© 2025 Justin DeGarbo / Cathexis Health. Vocabulary licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*
