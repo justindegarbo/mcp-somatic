@@ -1,10 +1,13 @@
 # Cathexis Somatic Ontology (CSO) v1.1
 
 **Namespace:** `https://cathexis.health/ontology/cso/v1.1/`
+**Prefix:** `cso:`
 
-**BioPortal:** [CXSO](https://bioportal.bioontology.org/ontologies/CXSO)
+**BioPortal:** [CXSO](https://bioportal.bioontology.org/ontologies/CXSO) — the ontology's canonical name is **CSO**; it is registered as CXSO on BioPortal only because the acronym CSO was unavailable there.
 
-**Zenodo DOI:** [10.5281/zenodo.20448395](https://doi.org/10.5281/zenodo.20448395)
+**Zenodo (concept DOI, always resolves to latest):** [10.5281/zenodo.18859896](https://doi.org/10.5281/zenodo.18859896)
+
+**License:** CC BY 4.0
 
 ---
 
@@ -92,10 +95,10 @@ Every data entity in the Cathexis architecture maps to one of four blanket compo
 
 | Component | CSO Term | What It Contains |
 |-----------|----------|-----------------|
-| **Internal State** | `cso:InternalState` | Body sensations, zone activations, sensation qualities, intensity, affect system activation |
-| **External State** | `cso:ExternalState` | Context chips, ecological layers, relational map entries, life transitions, HealthKit biometrics |
-| **Sensory** | `cso:SensoryState` | Check-in observations, prediction outcomes, assessment responses — the boundary between world and self |
-| **Active** | `cso:ActiveState` | Intervention responses, real-world experiment outcomes, regulation practices — the user acting on the world |
+| **Internal State** | `cso:internalState` | Body sensations, zone activations, sensation qualities, intensity, affect system activation |
+| **External State** | `cso:externalState` | Context chips, ecological layers, relational map entries, life transitions, HealthKit biometrics |
+| **Sensory** | `cso:sensory` | Check-in observations, prediction outcomes, assessment responses — the boundary between world and self |
+| **Active** | `cso:active` | Intervention responses, real-world experiment outcomes, regulation practices — the user acting on the world |
 
 ---
 
@@ -105,13 +108,13 @@ Panksepp's subcortical circuits. These are not constructed emotions — they are
 
 | System | CSO Term | Function | Somatic Signature |
 |--------|----------|----------|-------------------|
-| **SEEKING** | `cso:SEEKING` | Dopaminergic motivation, exploration, curiosity | Forward-leaning activation, upper body energization |
-| **RAGE** | `cso:RAGE` | Frustration-anger response | Jaw tension, fist clenching, heat in upper body |
-| **FEAR** | `cso:FEAR` | Threat detection and avoidance | Chest tightness, shallow breathing, freeze or flight readiness |
-| **LUST** | `cso:LUST` | Sexual and appetitive drive | Pelvic/lower body warmth, whole-body activation |
-| **CARE** | `cso:CARE` | Nurturing, attachment, bonding | Chest warmth, arm readiness, softening |
-| **PANIC/GRIEF** | `cso:PANIC_GRIEF` | Separation distress, loss response | Chest ache, throat constriction, hollow feeling |
-| **PLAY** | `cso:PLAY` | Social joy, boundary-testing, spontaneity | Lightness, whole-body buzzing, facial activation |
+| **SEEKING** | `cso:seeking` | Dopaminergic motivation, exploration, curiosity | Forward-leaning activation, upper body energization |
+| **RAGE** | `cso:rage` | Frustration-anger response | Jaw tension, fist clenching, heat in upper body |
+| **FEAR** | `cso:fear` | Threat detection and avoidance | Chest tightness, shallow breathing, freeze or flight readiness |
+| **LUST** | `cso:lust` | Sexual and appetitive drive | Pelvic/lower body warmth, whole-body activation |
+| **CARE** | `cso:care` | Nurturing, attachment, bonding | Chest warmth, arm readiness, softening |
+| **PANIC/GRIEF** | `cso:panicGrief` | Separation distress, loss response | Chest ache, throat constriction, hollow feeling |
+| **PLAY** | `cso:play` | Social joy, boundary-testing, spontaneity | Lightness, whole-body buzzing, facial activation |
 
 PLAY suppression is a sensitive clinical marker — a life without play indicates chronic nervous system strain. PLAY reactivation is a marker of program success across territories.
 
@@ -123,25 +126,25 @@ Anatomical regions rendered in the Neural Net visualization as Bézier paths on 
 
 | # | Region | Functional Label | Blanket Component |
 |---|--------|-----------------|-------------------|
-| 1 | Prefrontal Cortex | Prediction & Evaluation | sensory |
-| 2 | Anterior Cingulate | Conflict & Error Monitoring | sensory |
-| 3 | Posterior Cingulate | Self-Reflection | sensory |
-| 4 | Hippocampus | Memory & Context | sensory |
-| 5 | Thalamus | Sensory Gateway | sensory |
-| 6 | Amygdala | Threat & Salience Detection | sensory |
-| 7 | Insula (Anterior) | Body Awareness | internalState |
-| 8 | Insula (Posterior) | Body Signal Processing | internalState |
-| 9 | Somatosensory Cortex | Touch & Body Mapping | internalState |
-| 10 | Hypothalamus | Body Regulation | internalState |
-| 11 | Brainstem | Core Survival Systems | internalState |
-| 12 | Dorsolateral PFC | Context Processing | externalState |
-| 13 | Temporal Pole | Emotional Memory & Meaning | externalState |
-| 14 | Lateral Temporal Cortex | Language & Sound Processing | externalState |
-| 15 | Parietal Cortex | Spatial Awareness | externalState |
-| 16 | Occipital Cortex | Visual Processing | externalState |
-| 17 | Motor Cortex | Movement & Regulation | active |
-| 18 | Basal Ganglia | Habits & Motivation | active |
-| 19 | Cerebellum | Coordination & Timing | active |
+| 1 | Prefrontal Cortex | Decision-Making & Planning | active |
+| 2 | Anterior Cingulate | Conflict Monitor | sensory |
+| 3 | Orbitofrontal Cortex | Value Assessment | active |
+| 4 | Insula (Anterior) | Body Awareness | sensory |
+| 5 | Insula (Posterior) | Raw Body Signal | internalState |
+| 6 | Amygdala | Salience Detection | sensory |
+| 7 | Hippocampus | Context & Memory | sensory |
+| 8 | Hypothalamus | Body Regulation | internalState |
+| 9 | Thalamus | Sensory Relay | sensory |
+| 10 | Basal Ganglia | Habit & Reward | active |
+| 11 | Periaqueductal Gray | Survival Response | internalState |
+| 12 | Brainstem | Autonomic Control | internalState |
+| 13 | Cerebellum | Prediction Timing | active |
+| 14 | Somatosensory Cortex | Touch & Body Position | sensory |
+| 15 | Motor Cortex | Action Preparation | active |
+| 16 | Temporal Cortex | Social & Auditory | externalState |
+| 17 | Parietal Cortex | Spatial & Integration | sensory |
+| 18 | Visual Cortex | Visual Processing | externalState |
+| 19 | Default Mode Network | Self-Reflection | internalState |
 
 ---
 
@@ -151,17 +154,17 @@ Brain regions group into functional networks. These are the labels users see —
 
 | Network | Primary Component | What It Does |
 |---------|------------------|-------------|
-| Self-Reflection | sensory | Generates the continuous sense of self. Active during mind-wandering, autobiographical memory, self-referential processing. |
-| Attention & Priority | externalState | Detects what matters right now. Switches between internal body signals and external events based on salience. |
-| Focus & Planning | externalState | Holds goals in working memory, plans sequences, inhibits irrelevant signals. |
+| Self-Reflection | internalState | Generates the continuous sense of self. Active during mind-wandering, autobiographical memory, self-referential processing. |
+| Attention & Priority | sensory | Detects what matters right now. Switches between internal body signals and external events based on salience. |
+| Focus & Planning | sensory | Holds goals in working memory, plans sequences, inhibits irrelevant signals. |
 | Body Sensing | internalState | Reads the body's current state. Interoceptive awareness of heart rate, gut signals, breath, temperature. |
 | Threat Response | sensory | Detects threat and generates survival responses. Rapid, subcortical, often before conscious awareness. |
-| Motivation & Drive | active | Generates curiosity, wanting, approach behavior. The engine behind exploration and goal pursuit. |
-| Social Connection | externalState | Reads other people. Infers intentions, tracks social context, models relational dynamics. |
+| Motivation & Drive | activeState | Generates curiosity, wanting, approach behavior. The engine behind exploration and goal pursuit. |
+| Social Connection | sensory | Reads other people. Infers intentions, tracks social context, models relational dynamics. |
 | Learning & Memory | sensory | Consolidates new experiences into lasting patterns. Contextualizes current experience with past. |
-| Movement & Regulation | active | Coordinates movement, timing, and autonomic regulation. Body-based regulatory actions. |
+| Movement & Regulation | activeState | Coordinates movement, timing, and autonomic regulation. Body-based regulatory actions. |
 | Attachment & Loss | internalState | Processes separation distress and reunion signals. Monitors proximity to attachment figures. |
-| Play & Spontaneity | active | Generates social joy, boundary-testing, physical play. Suppression is a clinical marker of chronic strain. |
+| Play & Spontaneity | activeState | Generates social joy, boundary-testing, physical play. Suppression is a clinical marker of chronic strain. |
 
 Networks overlap — the same region participates in multiple networks with different roles. What you experience emerges from the pattern of activation across networks, not from any single one.
 
@@ -173,11 +176,11 @@ Based on Bronfenbrenner's ecological systems theory, adapted for somatic context
 
 | Layer | CSO Term | Scope | Context Chips |
 |-------|----------|-------|---------------|
-| **Microsystem** | `cso:micro` | Intimate relationships | Partner, Family, Close Friend |
-| **Mesosystem** | `cso:meso` | Daily environments | Work/School, Commute, Social Event, Home Environment |
-| **Exosystem** | `cso:exo` | Indirect systems | Healthcare, Financial, Legal, Workplace Policies |
-| **Macrosystem** | `cso:macro` | Cultural/societal | News/Media, Political Climate, Cultural Pressure |
-| **Chronosystem** | `cso:chrono` | Time/transitions | Life transitions (13 types tracked: new relationship, job change, relocation, health change, loss, pregnancy, graduation, retirement, divorce, new child, financial change, legal situation, other) |
+| **Microsystem** | `cso:microsystem` | Intimate relationships | Partner, Family, Close Friend |
+| **Mesosystem** | `cso:mesosystem` | Daily environments | Work/School, Commute, Social Event, Home Environment |
+| **Exosystem** | `cso:exosystem` | Indirect systems | Healthcare, Financial, Legal, Workplace Policies |
+| **Macrosystem** | `cso:macrosystem` | Cultural/societal | News/Media, Political Climate, Cultural Pressure |
+| **Chronosystem** | `cso:chronosystem` | Time/transitions | Life transitions (13 types tracked: new relationship, job change, relocation, health change, loss, pregnancy, graduation, retirement, divorce, new child, financial change, legal situation, other) |
 
 ---
 
@@ -228,4 +231,5 @@ Essential addition: **Bud Craig** — interoception framework. The pathway from 
 
 *CSO v1.1 — Updated May 2026*
 
-*© 2026 Cathexis Health. CC BY-NC-SA 4.0.*
+*© 2025 Justin DeGarbo / Cathexis Health. Licensed under CC BY 4.0 — free to use, adapt, and build on commercially with attribution. https://creativecommons.org/licenses/by/4.0/*
+
