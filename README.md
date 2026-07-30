@@ -33,27 +33,30 @@ Claude Desktop connects natively. Any MCP-compatible client works.
 
 **CSO Namespace URI:** `https://cathexis.health/ontology/cso/v1.1/`
 
-**BioPortal:** [CXSO on BioPortal](https://bioportal.bioontology.org/ontologies/CXSO)
+**BioPortal:** [CXSO on BioPortal](https://bioportal.bioontology.org/ontologies/CXSO) — the ontology's canonical name is **CSO**; it is registered as CXSO on BioPortal only because the acronym CSO was already taken there.
 
-**Zenodo DOI:** [10.5281/zenodo.20448395](https://doi.org/10.5281/zenodo.20448395) (White Paper v2.1 + machine ontology, CC BY-NC-SA 4.0)
+**Zenodo (concept DOI, always resolves to latest):** [10.5281/zenodo.18859896](https://doi.org/10.5281/zenodo.18859896)
 
-Machine-readable formats: OWL, Turtle, JSON-LD — all available at the Zenodo DOI.
+Machine-readable formats: OWL, Turtle, JSON-LD — all available at the Zenodo DOI, licensed CC BY 4.0.
 
 ## Published Materials
 
 | Document | Location |
 |----------|----------|
-| Somatic Ontology White Paper v2.1 | [Zenodo DOI: 10.5281/zenodo.20448395](https://doi.org/10.5281/zenodo.20448395) |
-| HEF Clinical Manual | [Zenodo DOI: 10.5281/zenodo.19157697](https://doi.org/10.5281/zenodo.19157697) |
+| Cathexis Somatic Ontology (CSO) — paper + machine-readable artifacts | [Zenodo concept DOI: 10.5281/zenodo.18859896](https://doi.org/10.5281/zenodo.18859896) |
+| HEF Clinical Manual v3.0 | [Zenodo concept DOI: 10.5281/zenodo.19157696](https://doi.org/10.5281/zenodo.19157696) |
+| Human Experience System (HES) v1.0 | [Zenodo concept DOI: 10.5281/zenodo.20438782](https://doi.org/10.5281/zenodo.20438782) |
 | CSO on BioPortal | [CXSO](https://bioportal.bioontology.org/ontologies/CXSO) |
-| HEF Community Guide | [cathexis.health/hef](https://cathexis.health/hef) |
+| HEF Community Guide | [cathexis.health/science](https://cathexis.health/science) |
 | Provider Integration Guide | [cathexis.health/providers](https://cathexis.health/providers) |
+
+*All Zenodo DOIs above are concept DOIs — they always resolve to the most recent version.*
 
 ## License
 
-**Vocabulary layer (this repository):** CC BY-NC-SA 4.0. Use the zones, qualities, territories, and affect system vocabulary in your agents and research. Attribution required. Non-commercial use.
+**Vocabulary layer (this repository):** CC BY 4.0. Use the zones, qualities, territories, and affect-system vocabulary in your agents, products, and research — including commercially. Attribution required; no other restriction. The vocabulary is published openly so that it can be adopted, extended, and built upon without a licensing barrier.
 
-**Clinical implementation (Cathexis app):** Proprietary. The intervention graphs, pattern detection logic, Bayesian inference pipeline, and therapeutic content are not included in this repository.
+**Clinical implementation (Cathexis app):** Proprietary. The intervention graphs, pattern-detection logic, Bayesian inference pipeline, and therapeutic content are not included in this repository and are not licensed here.
 
 ## Version
 
@@ -72,4 +75,4 @@ Machine-readable formats: OWL, Turtle, JSON-LD — all available at the Zenodo D
 
 *Sensation before emotion. Curiosity over judgment. Adaptation over pathology.*
 
-© 2026 Cathexis Health. All rights reserved.
+*© 2026 Justin DeGarbo / Cathexis Health. Vocabulary licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*
